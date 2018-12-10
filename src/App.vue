@@ -10,6 +10,7 @@
 </style>
 
 <script>
+// eslint-disable-next-line semi
 import compHeader from '@/components/Header.vue';
 export default {
   components: {
