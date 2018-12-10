@@ -1,0 +1,74 @@
+.login {
+  max-width: 50rem;
+  width: auto;
+  display: flex;
+  margin: auto auto;
+  flex-flow: column;
+  margin-top: 5rem;
+
+  &-dark-text {
+    font-size: 2rem;
+    color: $darkgrey-text;
+    font-weight: 700;
+    align-self: center;
+  }
+
+  &-light-text {
+    font-size: 1.8rem;
+    color: $lightgrey-text;
+    align-self: center;
+  }
+
+  &__box {
+    background-color: #fff;
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    height: auto;
+    padding: 3rem 4rem;
+    margin-top: 2rem;
+    margin-bottom: 10rem;
+    box-shadow: 10px 10px 170px -45px rgba(0, 0, 0, 0.1);
+
+    &-profileImg {
+      height: 14.5rem;
+      width: 14.5rem;
+      border-radius: 100px;
+      box-shadow: 10px 10px 170px -45px rgba(0, 0, 0, 0.75);
+      align-self: center;
+      margin-bottom: 3rem;
+    }
+
+    &-loginForm {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+
+      input {
+        border-radius: 30px;
+        border: 2px solid $lightgrey-input-border;
+        background-color: $lightgrey-input-bg;
+        padding: 1rem 4rem;
+        color: $lightgrey-text;
+        width: 35rem;
+        height: 5rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+
+        &::placeholder {
+          color: $lightgrey-text;
+        }
+      }
+
+      &-onSubmit {
+        background-color: $orange;
+        padding: 1rem 4rem;
+        width: 35rem;
+        height: 5rem;
+        color: #fff;
+        border-radius: 30px;
+      }
+    }
+  }
+}

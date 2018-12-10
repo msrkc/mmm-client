@@ -1,0 +1,34 @@
+.header {
+  background-color: #fff;
+  width: 100%;
+  height: 9rem;
+  display: flex;
+  justify-content: space-between;
+
+  &__logo {
+    margin-left: 5rem;
+    display: flex;
+    border-right: 1px $lightgrey-border solid;
+    align-items: center;
+    padding-right: 5rem;
+  }
+
+  &__buttons {
+    margin-right: 5rem;
+    align-items: center;
+    display: flex;
+
+    &-btn {
+      font-size: 1.2rem;
+      color: #fff;
+      background-color: $lightgrey-btn;
+      border-radius: 30px;
+      padding: 1rem 4rem;
+      transition: all .5s;
+
+      &:hover {
+        background-color: $darkgrey;
+      }
+    }
+  }
+}

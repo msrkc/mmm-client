@@ -1,0 +1,44 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%; // 10px = 1rem
+
+}
+
+#app {
+  width: 100%;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  color: $darkgrey-text;
+  background-color: $bg;
+}
+
+.btn {
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+}
+
+input {
+  outline: none;
+}
+
+.footer {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
