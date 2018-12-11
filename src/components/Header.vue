@@ -18,6 +18,17 @@
         tag="button"
         v-if="$route.name === 'register'"
       >Mam już konto</router-link>
+        <button class="btn header__buttons-btn" v-if="$route.name === 'home'" @click="onLogout">Logout</button>
     </div>
   </header>
 </template>
+
+<script>
+export default {
+  methods: {
+    onLogout () {
+      this.$store.dispatch('logout')
+    }
+  }
+}
+</script>

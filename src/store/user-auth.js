@@ -1,4 +1,5 @@
 import axios from 'axios'
+import router from '@/router'
 
 const state = {
   token: null,
@@ -6,21 +7,27 @@ const state = {
 }
 
 const getters = {
-
+  email (state) {
+    return state.email
+  }
 }
 
 const mutations = {
   authUser (state, userData) {
     state.token = userData.token
     state.email = userData.email
+  },
+  clearAuthData (state) {
+    state.token = null
+    state.email = null
   }
 }
 
 const actions = {
-  login ({ commit }, authData) {
+  login ({ commit }, payload) {
     axios.post('/login/', {
-      email: authData.email,
-      password: authData.password
+      email: payload.email,
+      password: payload.password
     }
     // , {
     //   headers: {
@@ -29,28 +36,37 @@ const actions = {
     //   }
     // }
     )
-      .then(res => {
-        console.log(res)
+      .then(({ data }) => {
+        console.log(data)
         commit('authUser', {
-          token: res.token,
-          email: res.client.email
+          token: data.token,
+          email: data.client.email
         })
+        localStorage.setItem('token', data.token)
+        router.push('/')
       })
       .catch(error => console.log(error))
   },
-  signup ({ commit }, authData) {
+  signup ({ commit }, payload) {
     axios.post('/register/', {
-      email: authData.email,
-      password: authData.password
+      email: payload.email,
+      password: payload.password
     })
-      .then(res => {
-        console.log(res)
+      .then(({ data }) => {
+        console.log(data)
         commit('authUser', {
-          token: res.token,
-          email: res.client.email
+          token: data.token,
+          email: data.client.email
         })
+        localStorage.setItem('token', data.token)
+        router.push('/')
       })
       .catch(error => console.log(error))
+  },
+  logout ({ commit }) {
+    commit('clearAuthData')
+    localStorage.removeItem('token')
+    router.replace('/login')
   }
 }
 
