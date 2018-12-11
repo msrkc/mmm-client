@@ -9,8 +9,8 @@
           <div class="login__box">
             <img src="../../../public/temp/profile.jpg" alt="profile" class="login__box-profileImg">
             <div class="login__box-loginForm">
-              <input type="text" placeholder="Wpisz adres e-mail" required>
-              <input type="password" placeholder="Wpisz hasło" required>
+              <input type="text" placeholder="Wpisz adres e-mail" v-model="email" required>
+              <input type="password" placeholder="Wpisz hasło" v-model="password" required>
               <button class="btn login__box-loginForm-onSubmit">Zarejestruj się</button>
             </div>
           </div>
@@ -34,9 +34,10 @@ export default {
         email: this.email,
         password: this.password
       }
-      console.log(formData)
+      // console.log(formData)
       this.$store.dispatch('signup', {
-        formData
+        email: formData.email,
+        password: formData.password
       })
     }
   }

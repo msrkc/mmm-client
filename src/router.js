@@ -31,7 +31,14 @@ export default new Router({
     {
       path: '/register',
       name: 'register',
-      component: Register
+      component: Register,
+      beforeEnter (to, from, next) {
+        if (!store.state.userAuth.token) {
+          next()
+        } else {
+          next('/')
+        }
+      }
     }
   ]
 })

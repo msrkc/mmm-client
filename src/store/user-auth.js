@@ -25,6 +25,7 @@ const mutations = {
 
 const actions = {
   login ({ commit }, payload) {
+    console.log(payload)
     axios.post('/login/', {
       email: payload.email,
       password: payload.password
@@ -37,7 +38,7 @@ const actions = {
     // }
     )
       .then(({ data }) => {
-        console.log(data)
+        // console.log(data)
         commit('authUser', {
           token: data.token,
           email: data.client.email
@@ -48,12 +49,13 @@ const actions = {
       .catch(error => console.log(error))
   },
   signup ({ commit }, payload) {
+    console.log(payload)
     axios.post('/register/', {
       email: payload.email,
       password: payload.password
     })
       .then(({ data }) => {
-        console.log(data)
+        // console.log(data)
         commit('authUser', {
           token: data.token,
           email: data.client.email
