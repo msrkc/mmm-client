@@ -14,6 +14,7 @@
       [x] login register requests
       [x] set/remove token to/from Localstorage
       [x] logout
+      [x] validation
 
     </pre>
   </div>

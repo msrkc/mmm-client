@@ -17,6 +17,9 @@
                 placeholder="Wpisz adres e-mail"
                 required
               >
+              <span :class="{login__error: error}" v-if="validateEmail">
+                {{validateEmail()}}
+              </span>
               <input
                 type="password"
                 id="password"
@@ -24,6 +27,9 @@
                 placeholder="Wpisz hasło"
                 required
               >
+              <span :class="{login__error: error}" v-if="validatePassword">
+                {{validatePassword()}}
+              </span>
               <button class="btn login__box-loginForm-onSubmit">Zaloguj się</button>
             </div>
           </form>
@@ -38,31 +44,23 @@ export default {
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      error: false
     }
   },
   methods: {
-    // onSubmit() {
-    //   const formData = {
-    //     email: this.email,
-    //     password: this.password
-    //   };
-    //   fetch("https://api.makemymind.com/client/login/", {
-    //     method: "post",
-    //     mode: "no-cors",
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "multipart/form-data"
-    //     },
-    //     body: JSON.stringify({
-    //       name: formData.email,
-    //       password: formData.password
-    //     })
-    //   }).then(response => {
-    //     console.log(response);
-    //   });
-    // }
-
+    validateEmail () {
+      if (this.$store.getters.errors.email) {
+        this.error = true
+        return this.$store.getters.errors.email[0]
+      }
+    },
+    validatePassword () {
+      if (this.$store.getters.errors.password) {
+        this.error = true
+        return this.$store.getters.errors.password[0]
+      }
+    },
     onSubmit () {
       const formData = {
         email: this.email,
@@ -73,6 +71,11 @@ export default {
         email: formData.email,
         password: formData.password
       })
+      this.email = ''
+      this.password = ''
+      setTimeout(() => {
+        this.$store.dispatch('cleanError')
+      }, 3000)
     }
   }
 }

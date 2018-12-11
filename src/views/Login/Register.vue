@@ -9,8 +9,14 @@
           <div class="login__box">
             <img src="../../../public/temp/profile.jpg" alt="profile" class="login__box-profileImg">
             <div class="login__box-loginForm">
-              <input type="text" placeholder="Wpisz adres e-mail" v-model="email" required>
-              <input type="password" placeholder="Wpisz hasło" v-model="password" required>
+              <input type="text" placeholder="Wpisz adres e-mail" v-model="email" v-if="validateEmail" required>
+              <span :class="{login__error: error}" v-if="validateEmail">
+                {{validateEmail()}}
+              </span>
+              <input type="password" placeholder="Wpisz hasło" v-model="password" v-if="validatePassword" required>
+              <span :class="{login__error: error}" v-if="validatePassword">
+                {{validatePassword()}}
+              </span>
               <button class="btn login__box-loginForm-onSubmit">Zarejestruj się</button>
             </div>
           </div>
@@ -25,10 +31,23 @@ export default {
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      error: false
     }
   },
   methods: {
+    validateEmail () {
+      if (this.$store.getters.errors.email) {
+        this.error = true
+        return this.$store.getters.errors.email[0]
+      } else {}
+    },
+    validatePassword () {
+      if (this.$store.getters.errors.password) {
+        this.error = true
+        return this.$store.getters.errors.password[0]
+      }
+    },
     onSubmit () {
       const formData = {
         email: this.email,
@@ -39,6 +58,12 @@ export default {
         email: formData.email,
         password: formData.password
       })
+      this.email = ''
+      this.password = ''
+      setTimeout(() => {
+        this.$store.dispatch('cleanError')
+        this.error = false
+      }, 3000)
     }
   }
 }

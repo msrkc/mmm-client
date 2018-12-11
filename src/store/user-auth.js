@@ -3,12 +3,16 @@ import router from '@/router'
 
 const state = {
   token: null,
-  email: null
+  email: null,
+  errors: ''
 }
 
 const getters = {
   email (state) {
     return state.email
+  },
+  errors (state) {
+    return state.errors
   }
 }
 
@@ -20,6 +24,9 @@ const mutations = {
   clearAuthData (state) {
     state.token = null
     state.email = null
+  },
+  showError (state, payload) {
+    state.errors = payload
   }
 }
 
@@ -30,12 +37,6 @@ const actions = {
       email: payload.email,
       password: payload.password
     }
-    // , {
-    //   headers: {
-    //     'Content-Type': 'application/x-www-form-urlencoded',
-    //     'Access-Control-Allow-Origin': '*'
-    //   }
-    // }
     )
       .then(({ data }) => {
         // console.log(data)
@@ -46,7 +47,12 @@ const actions = {
         localStorage.setItem('token', data.token)
         router.push('/')
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        if (error.response.data) {
+          console.log(error.response.data)
+          commit('showError', error.response.data)
+        }
+      })
   },
   signup ({ commit }, payload) {
     console.log(payload)
@@ -63,12 +69,20 @@ const actions = {
         localStorage.setItem('token', data.token)
         router.push('/')
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        if (error.response.data) {
+          console.log(error.response.data)
+          commit('showError', error.response.data)
+        }
+      })
   },
   logout ({ commit }) {
     commit('clearAuthData')
     localStorage.removeItem('token')
     router.replace('/login')
+  },
+  cleanError ({ commit }) {
+    commit('showError', '')
   }
 }
 
