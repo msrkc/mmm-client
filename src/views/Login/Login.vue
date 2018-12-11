@@ -75,6 +75,7 @@ export default {
       this.password = ''
       setTimeout(() => {
         this.$store.dispatch('cleanError')
+        this.error = false
       }, 3000)
     }
   }
