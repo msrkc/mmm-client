@@ -16,28 +16,26 @@ export default new Router({
       name: 'home',
       component: Home,
       beforeEnter (to, from, next) {
-        if (store.state.userAuth.token) {
-          next()
-        } else {
-          next('/login')
-        }
+        const token = localStorage.getItem('token')
+        return token ? next() : next('/login')
       }
     },
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
+      beforeEnter (to, from, next) {
+        const token = localStorage.getItem('token')
+        return token ? next('/') : next()
+      }
     },
     {
       path: '/register',
       name: 'register',
       component: Register,
       beforeEnter (to, from, next) {
-        if (!store.state.userAuth.token) {
-          next()
-        } else {
-          next('/')
-        }
+        const token = localStorage.getItem('token')
+        return token ? next('/') : next()
       }
     }
   ]

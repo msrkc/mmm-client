@@ -83,6 +83,16 @@ const actions = {
   },
   cleanError ({ commit }) {
     commit('showError', '')
+  },
+  tryAutoLogin ({ commit }) {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      return
+    }
+    commit('authUser', {
+      token: token,
+      email: ''
+    })
   }
 }
 

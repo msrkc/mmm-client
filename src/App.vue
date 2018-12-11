@@ -14,6 +14,9 @@ import compHeader from '@/components/Header.vue'
 export default {
   components: {
     compHeader
+  },
+  created () {
+    this.$store.dispatch('tryAutoLogin')
   }
 }
 </script>
