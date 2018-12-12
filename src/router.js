@@ -1,12 +1,30 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from './store'
 
 import Home from './views/Home.vue'
 import Login from './views/Login/Login.vue'
 import Register from './views/Login/Register.vue'
 
 Vue.use(Router)
+
+const guardNoUser = {
+  beforeEnter (to, from, next) {
+    const token = localStorage.getItem('token')
+    if (token) {
+      next()
+    } else {
+      localStorage.removeItem('token')
+      next('/')
+    }
+  }
+}
+
+const guardUser = {
+  beforeEnter (to, from, next) {
+    const token = localStorage.getItem('token')
+    return token ? next('/') : next()
+  }
+}
 
 export default new Router({
   mode: 'history',
@@ -15,28 +33,18 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
-      beforeEnter (to, from, next) {
-        const token = localStorage.getItem('token')
-        return token ? next() : next('/login')
-      }
-    },
+      ...guardNoUser },
     {
       path: '/login',
       name: 'login',
       component: Login,
-      beforeEnter (to, from, next) {
-        const token = localStorage.getItem('token')
-        return token ? next('/') : next()
-      }
+      ...guardUser
     },
     {
       path: '/register',
       name: 'register',
       component: Register,
-      beforeEnter (to, from, next) {
-        const token = localStorage.getItem('token')
-        return token ? next('/') : next()
-      }
+      ...guardUser
     }
   ]
 })

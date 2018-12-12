@@ -1,42 +1,43 @@
 <template>
-  <transition name="fade" mode="out-in">
-    <div>
-      <!-- Powrót -->
-      <div class="login">
-        <span class="login-dark-text">Sprawdź najnowsze funkcje!</span>
-        <span class="login-light-text">Zaloguj się</span>
-        <div class="login__box">
-          <img src="../../../public/temp/profile.jpg" alt="profile" class="login__box-profileImg">
+<transition name="fade" mode="out-in">
+  <div>
+    <!-- Powrót -->
+    <div class="login">
+      <span class="login-dark-text">Sprawdź najnowsze funkcje!</span>
+      <span class="login-light-text">Zaloguj się</span>
+      <div class="login__box">
+        <img src="../../../public/temp/profile.jpg" alt="profile" class="login__box-profileImg">
 
-          <form @submit.prevent="onSubmit">
-            <div class="login__box-loginForm">
-              <input
+        <form @submit.prevent="onSubmit">
+          <div class="login__box-loginForm">
+            <input
                 type="text"
                 id="email"
                 v-model="email"
                 placeholder="Wpisz adres e-mail"
-                required
               >
-              <span :class="{login__error: error}" v-if="validateEmail">
+            <span :class="{login__error: error}" v-if="validateEmail">
                 {{validateEmail()}}
               </span>
-              <input
+            <input
                 type="password"
                 id="password"
                 v-model="password"
                 placeholder="Wpisz hasło"
-                required
               >
-              <span :class="{login__error: error}" v-if="validatePassword">
+            <span :class="{login__error: error}" v-if="validatePassword">
                 {{validatePassword()}}
               </span>
-              <button class="btn login__box-loginForm-onSubmit">Zaloguj się</button>
-            </div>
-          </form>
-        </div>
+            <button class="btn login__box-loginForm-onSubmit">
+              <span v-if="$store.state.userAuth.process === 1"> Czekaj </span>
+              <span v-else>Zaloguj się</span>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
-  </transition>
+  </div>
+</transition>
 </template>
 
 <script>
@@ -66,7 +67,6 @@ export default {
         email: this.email,
         password: this.password
       }
-      console.log(formData)
       this.$store.dispatch('login', {
         email: formData.email,
         password: formData.password
@@ -76,7 +76,7 @@ export default {
       setTimeout(() => {
         this.$store.dispatch('cleanError')
         this.error = false
-      }, 3000)
+      }, 5000)
     }
   }
 }

@@ -4,7 +4,8 @@ import router from '@/router'
 const state = {
   token: null,
   email: null,
-  errors: ''
+  errors: '',
+  process: '0'
 }
 
 const getters = {
@@ -27,51 +28,54 @@ const mutations = {
   },
   showError (state, payload) {
     state.errors = payload
+  },
+  process (state, payload) {
+    state.process = payload
   }
 }
 
 const actions = {
-  login ({ commit }, payload) {
-    console.log(payload)
+  login ({ commit, state }, payload) {
+    commit('process', 1)
     axios.post('/login/', {
       email: payload.email,
       password: payload.password
     }
     )
       .then(({ data }) => {
-        // console.log(data)
         commit('authUser', {
           token: data.token,
           email: data.client.email
         })
+        commit('process', 0)
         localStorage.setItem('token', data.token)
         router.push('/')
       })
       .catch(error => {
+        commit('process', 0)
         if (error.response.data) {
-          console.log(error.response.data)
           commit('showError', error.response.data)
         }
       })
   },
   signup ({ commit }, payload) {
-    console.log(payload)
+    commit('process', 1)
     axios.post('/register/', {
       email: payload.email,
       password: payload.password
     })
       .then(({ data }) => {
-        // console.log(data)
         commit('authUser', {
           token: data.token,
           email: data.client.email
         })
+        commit('process', 0)
         localStorage.setItem('token', data.token)
         router.push('/')
       })
       .catch(error => {
+        commit('process', 0)
         if (error.response.data) {
-          console.log(error.response.data)
           commit('showError', error.response.data)
         }
       })

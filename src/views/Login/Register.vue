@@ -1,29 +1,32 @@
 <template>
-  <transition name="fade" mode="out-in">
-    <div>
-      <!-- Powrót -->
-      <div class="login">
-        <span class="login-dark-text">Przekonaj się jakie to proste!</span>
-        <span class="login-light-text">Zarejestruj się już dziś</span>
-        <form @submit.prevent="onSubmit">
-          <div class="login__box">
-            <img src="../../../public/temp/profile.jpg" alt="profile" class="login__box-profileImg">
-            <div class="login__box-loginForm">
-              <input type="text" placeholder="Wpisz adres e-mail" v-model="email" v-if="validateEmail" required>
-              <span :class="{login__error: error}" v-if="validateEmail">
+<transition name="fade" mode="out-in">
+  <div>
+    <!-- Powrót -->
+    <div class="login">
+      <span class="login-dark-text">Przekonaj się jakie to proste!</span>
+      <span class="login-light-text">Zarejestruj się już dziś</span>
+      <form @submit.prevent="onSubmit">
+        <div class="login__box">
+          <img src="../../../public/temp/profile.jpg" alt="profile" class="login__box-profileImg">
+          <div class="login__box-loginForm">
+            <input type="text" placeholder="Wpisz adres e-mail" v-model="email" v-if="validateEmail">
+            <span :class="{login__error: error}" v-if="validateEmail">
                 {{validateEmail()}}
               </span>
-              <input type="password" placeholder="Wpisz hasło" v-model="password" v-if="validatePassword" required>
-              <span :class="{login__error: error}" v-if="validatePassword">
+            <input type="password" placeholder="Wpisz hasło" v-model="password" v-if="validatePassword">
+            <span :class="{login__error: error}" v-if="validatePassword">
                 {{validatePassword()}}
               </span>
-              <button class="btn login__box-loginForm-onSubmit">Zarejestruj się</button>
-            </div>
+            <button class="btn login__box-loginForm-onSubmit">
+              <span v-if="$store.state.userAuth.process === 1"> Czekaj </span>
+              <span v-else>Zarejestruj się</span>
+              </button>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
-  </transition>
+  </div>
+</transition>
 </template>
 
 <script>
@@ -63,7 +66,7 @@ export default {
       setTimeout(() => {
         this.$store.dispatch('cleanError')
         this.error = false
-      }, 3000)
+      }, 5000)
     }
   }
 }
