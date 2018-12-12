@@ -10,11 +10,11 @@ Vue.use(Router)
 const guardNoUser = {
   beforeEnter (to, from, next) {
     const token = localStorage.getItem('token')
-    if (token) {
-      next()
-    } else {
+    if (!token) {
       localStorage.removeItem('token')
-      next('/')
+      next('/login')
+    } else {
+      next()
     }
   }
 }
