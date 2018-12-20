@@ -10,6 +10,14 @@ const state = {
 const getters = {
   errors (state) {
     return state.errors
+  },
+  process (state) {
+    return state.process
+  },
+  isAuth (state) {
+    if (state.token) {
+      return true
+    } else { return false }
   }
 }
 
@@ -21,19 +29,18 @@ const mutations = {
     state.token = null
     state.email = null
   },
-  showError (state, payload) {
-    state.errors = payload
+  showError (state, error) {
+    state.errors = error
   },
-  process (state, payload) {
-    state.process = payload
+  process (state, process) {
+    state.process = process
   }
 }
 
 const actions = {
   login ({ commit, state }, payload) {
     commit('process', 1)
-    axios.post('/login/', { ...payload }
-    )
+    axios.post('/login/', { ...payload })
       .then(({ data }) => {
         commit('authUser', {
           token: data.token
@@ -51,8 +58,7 @@ const actions = {
   },
   signup ({ commit }, payload) {
     commit('process', 1)
-    axios.post('/register/', { ...payload
-    })
+    axios.post('/register/', { ...payload })
       .then(({ data }) => {
         commit('authUser', {
           token: data.token
@@ -82,8 +88,7 @@ const actions = {
       return
     }
     commit('authUser', {
-      token: token,
-      email: ''
+      token: token
     })
   }
 }

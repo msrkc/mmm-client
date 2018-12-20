@@ -18,13 +18,18 @@
         tag="button"
         v-if="$route.name === 'register'"
       >Mam już konto</router-link>
-        <button class="btn header__buttons-btn" v-if="$route.name === 'home'" @click="onLogout">Logout</button>
+        <button class="btn header__buttons-btn" v-if="isAuth" @click="onLogout">Logout</button>
     </div>
   </header>
 </template>
 
 <script>
 export default {
+  computed: {
+    isAuth () {
+      return this.$store.getters['userAuth/isAuth']
+    }
+  },
   methods: {
     onLogout () {
       this.$store.dispatch('userAuth/logout')

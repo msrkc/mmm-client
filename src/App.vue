@@ -10,7 +10,7 @@
 </style>
 
 <script>
-import compHeader from '@/components/Header.vue'
+import compHeader from '@/components/UI/Header.vue'
 export default {
   components: {
     compHeader

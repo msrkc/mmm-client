@@ -5,15 +5,6 @@ import userAuth from './store/user-auth'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-
-  },
-  mutations: {
-
-  },
-  actions: {
-
-  },
   modules: {
     userAuth
   }

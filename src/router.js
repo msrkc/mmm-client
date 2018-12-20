@@ -1,9 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Home from './views/Home.vue'
-import Login from './views/Login/Login.vue'
-import Register from './views/Login/Register.vue'
+import Login from '@/components/Login/Login.vue'
+import Register from '@/components/Login/Register.vue'
+import NotFound from '@/components/UI/NotFound.vue'
+import Welcome from '@/components/Dashboard/Welcome.vue'
+
+import Dashboard from '@/components/Dashboard.vue'
+import DashboardHome from '@/components/Dashboard/DashboardHome.vue'
+import CompanyInformation from '@/components/Dashboard/Company/CompanyInformation.vue'
 
 Vue.use(Router)
 
@@ -28,11 +33,25 @@ const guardUser = {
 export default new Router({
   mode: 'history',
   routes: [
+    { path: '/dashboard',
+      component: Dashboard,
+      children: [
+        { path: '/', component: Welcome },
+        { path: 'information', component: CompanyInformation }
+      ],
+      ...guardNoUser },
     {
       path: '/',
       name: 'home',
-      component: Home,
-      ...guardNoUser },
+      redirect: '/dashboard',
+      ...guardNoUser
+    },
+    {
+      path: '/welcome',
+      name: 'welcome',
+      component: Welcome,
+      ...guardNoUser
+    },
     {
       path: '/login',
       name: 'login',
@@ -44,6 +63,8 @@ export default new Router({
       name: 'register',
       component: Register,
       ...guardUser
-    }
+    },
+
+    { path: '*', component: NotFound }
   ]
 })

@@ -29,7 +29,7 @@
                 {{validate()}}
               </span>
             <button class="btn login__box-loginForm-onSubmit">
-              <span v-if="$store.state.userAuth.process === 1"> Czekaj </span>
+              <span v-if="process === 1"> Czekaj </span>
               <span v-else>Zaloguj się</span>
             </button>
           </div>
@@ -49,6 +49,11 @@ export default {
         password: ''
       },
       error: false
+    }
+  },
+  computed: {
+    process () {
+      return this.$store.getters['userAuth/process']
     }
   },
   methods: {
@@ -71,6 +76,9 @@ export default {
         this.error = false
       }, 5000)
     }
+  },
+  beforeDestroy () {
+    this.$store.dispatch('userAuth/cleanError')
   }
 }
 </script>

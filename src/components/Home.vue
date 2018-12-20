@@ -28,9 +28,6 @@
 </template>
 
 <script>
-import {
-  mapGetters
-} from 'vuex'
 export default {
   data () {
     return {
@@ -39,12 +36,8 @@ export default {
         name: '',
         compSize: '',
         compPlan: ''
-
       }
     }
-  },
-  computed: {
-    ...mapGetters(['email'])
   },
   methods: {
     send () {
