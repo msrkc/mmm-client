@@ -3,7 +3,7 @@
   <div>
     <div class="login" v-if="isLoading">
       <div class="loading">
-        <img src="../../../dist/img/loading.png" alt="">
+        <img src="@/assets/img/loading.png" alt="">
         <span class="login-dark-text">Przetwarzanie danych</span>
         <span class="login-light-text">Jeszcze tylko chwila</span>
       </div>
