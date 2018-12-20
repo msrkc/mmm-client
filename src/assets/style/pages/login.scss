@@ -24,6 +24,7 @@
     color: $darkgrey-text;
     align-self: center;
     font-weight: 500;
+    margin-top: 2rem;
   }
 
   &__box {
@@ -89,7 +90,7 @@
   &-radio-img {
     display: flex;
     flex-flow: row;
-    margin: 3rem 0;
+    margin: 1.5rem 0;
 
     .input-hidden {
       position: absolute;
