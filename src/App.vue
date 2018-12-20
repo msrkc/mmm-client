@@ -16,7 +16,7 @@ export default {
     compHeader
   },
   created () {
-    this.$store.dispatch('tryAutoLogin')
+    this.$store.dispatch('userAuth/tryAutoLogin')
   }
 }
 </script>

@@ -11,7 +11,6 @@ const guardNoUser = {
   beforeEnter (to, from, next) {
     const token = localStorage.getItem('token')
     if (!token) {
-      localStorage.removeItem('token')
       next('/login')
     } else {
       next()

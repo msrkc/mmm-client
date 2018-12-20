@@ -3,15 +3,11 @@ import router from '@/router'
 
 const state = {
   token: null,
-  email: null,
   errors: '',
-  process: '0'
+  process: 0
 }
 
 const getters = {
-  email (state) {
-    return state.email
-  },
   errors (state) {
     return state.errors
   }
@@ -20,7 +16,6 @@ const getters = {
 const mutations = {
   authUser (state, userData) {
     state.token = userData.token
-    state.email = userData.email
   },
   clearAuthData (state) {
     state.token = null
@@ -37,15 +32,11 @@ const mutations = {
 const actions = {
   login ({ commit, state }, payload) {
     commit('process', 1)
-    axios.post('/login/', {
-      email: payload.email,
-      password: payload.password
-    }
+    axios.post('/login/', { ...payload }
     )
       .then(({ data }) => {
         commit('authUser', {
-          token: data.token,
-          email: data.client.email
+          token: data.token
         })
         commit('process', 0)
         localStorage.setItem('token', data.token)
@@ -60,14 +51,11 @@ const actions = {
   },
   signup ({ commit }, payload) {
     commit('process', 1)
-    axios.post('/register/', {
-      email: payload.email,
-      password: payload.password
+    axios.post('/register/', { ...payload
     })
       .then(({ data }) => {
         commit('authUser', {
-          token: data.token,
-          email: data.client.email
+          token: data.token
         })
         commit('process', 0)
         localStorage.setItem('token', data.token)
@@ -101,6 +89,7 @@ const actions = {
 }
 
 export default {
+  namespaced: true,
   state,
   mutations,
   actions,

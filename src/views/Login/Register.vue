@@ -9,13 +9,13 @@
         <div class="login__box">
           <img src="../../../public/temp/profile.jpg" alt="profile" class="login__box-profileImg">
           <div class="login__box-loginForm">
-            <input type="text" placeholder="Wpisz adres e-mail" v-model="email" v-if="validateEmail">
-            <span :class="{login__error: error}" v-if="validateEmail">
-                {{validateEmail()}}
+            <input type="text" placeholder="Wpisz adres e-mail" v-model="formData.email" v-if="validate">
+            <span :class="{login__error: error}" v-if="validate">
+                {{validate()}}
               </span>
-            <input type="password" placeholder="Wpisz hasło" v-model="password" v-if="validatePassword">
-            <span :class="{login__error: error}" v-if="validatePassword">
-                {{validatePassword()}}
+            <input type="password" placeholder="Wpisz hasło" v-model="formData.password" v-if="validate">
+            <span :class="{login__error: error}" v-if="validate">
+                {{validate()}}
               </span>
             <button class="btn login__box-loginForm-onSubmit">
               <span v-if="$store.state.userAuth.process === 1"> Czekaj </span>
@@ -33,38 +33,30 @@
 export default {
   data () {
     return {
-      email: '',
-      password: '',
+      formData: {
+        email: '',
+        password: ''
+      },
       error: false
     }
   },
   methods: {
-    validateEmail () {
-      if (this.$store.getters.errors.email) {
+    validate () {
+      const errors = this.$store.getters['userAuth/errors']
+      if (errors.email) {
         this.error = true
-        return this.$store.getters.errors.email[0]
-      } else {}
-    },
-    validatePassword () {
-      if (this.$store.getters.errors.password) {
+        return errors.email[0]
+      } else if (errors.password) {
         this.error = true
-        return this.$store.getters.errors.password[0]
+        return errors.password[0]
       }
     },
     onSubmit () {
-      const formData = {
-        email: this.email,
-        password: this.password
-      }
-      // console.log(formData)
-      this.$store.dispatch('signup', {
-        email: formData.email,
-        password: formData.password
-      })
-      this.email = ''
-      this.password = ''
+      this.$store.dispatch('userAuth/signup', this.formData)
+      this.formData.email = ''
+      this.formData.password = ''
       setTimeout(() => {
-        this.$store.dispatch('cleanError')
+        this.$store.dispatch('userAuth/cleanError')
         this.error = false
       }, 5000)
     }
