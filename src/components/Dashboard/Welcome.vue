@@ -1,8 +1,14 @@
 <template>
 <transition name="fade" mode="out-in">
   <div>
-    <!-- Powrót -->
-    <div class="login">
+    <div class="login" v-if="isLoading">
+      <div class="loading">
+        <img src="../../../dist/img/loading.png" alt="">
+        <span class="login-dark-text">Przetwarzanie danych</span>
+        <span class="login-light-text">Jeszcze tylko chwila</span>
+      </div>
+    </div>
+    <div class="login" v-else>
       <span class="login-dark-text">Opowiedz o firmie</span>
       <span class="login-light-text">Personalizacja</span>
       <div class="login__box">
@@ -42,7 +48,7 @@
               <img src="@/assets/img/form/welcome/500.png"/>
               <span>150-500</span>
               </label>
-               <input
+              <input
                   type="radio" name="company_size"
                   id="500plus" class="input-hidden" />
               <label for="500plus">
@@ -93,5 +99,35 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data () {
+    return {
+      isLoading: true
+    }
+  },
+  methods: {
+    falseLoading () {
+      setTimeout(() => {
+        this.isLoading = false
+      }, 3000)
+    }
+  },
+  mounted () {
+    this.falseLoading()
+  }
+}
 </script>
+
+<style lang="scss" scoped>
+  .loading {
+    margin-top:-20rem;
+    height: 100vh;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    img{
+      justify-self:center;
+      align-self:center;
+    }
+  }
+</style>
