@@ -7,7 +7,10 @@
       <span class="login-light-text">Zarejestruj się już dziś</span>
       <form @submit.prevent="onSubmit">
         <div class="login__box">
-          <img src="../../../public/temp/profile.jpg" alt="profile" class="login__box-profileImg">
+          <!-- <img src="../../../public/temp/profile.jpg" alt="profile" class="login__box-profileImg"> -->
+          <div class="login__box-profileImg">
+            <avatar :name='avatarName' size='110' :rounded=true />
+          </div>
           <div class="login__box-loginForm">
             <input type="text" placeholder="Wpisz adres e-mail" v-model="formData.email" v-if="validate">
             <span :class="{login__error: error}" v-if="validate">
@@ -33,6 +36,7 @@
 
 <script>
 import loadingSvg from '@/components/UI/form/loading.vue'
+import avatar from '@/components/UI/avatar.vue'
 export default {
   data () {
     return {
@@ -46,6 +50,13 @@ export default {
   computed: {
     process () {
       return this.$store.getters['userAuth/process']
+    },
+    avatarName () {
+      let avatar = this.formData.email
+      if (avatar.length <= 0) {
+        avatar = 'makemymind'
+      }
+      return avatar
     }
   },
   methods: {
@@ -73,7 +84,8 @@ export default {
     this.$store.dispatch('userAuth/cleanError')
   },
   components: {
-    loadingSvg
+    loadingSvg,
+    avatar
   }
 }
 </script>
