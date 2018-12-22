@@ -17,10 +17,12 @@
             <span :class="{login__error: error}" v-if="validate">
                 {{validate()}}
               </span>
-            <button class="btn login__box-loginForm-onSubmit">
-              <span v-if="process === 1"> Czekaj </span>
-              <span v-else>Zarejestruj się</span>
-              </button>
+            <button class="btn login__box-loginForm-onSubmit login__box-loading" v-if="process === 1">
+             <loading-svg color="#FF0505"></loading-svg>
+            </button>
+            <button class="btn login__box-loginForm-onSubmit" v-else>
+              Zarejestruj się
+            </button>
           </div>
         </div>
       </form>
@@ -30,6 +32,7 @@
 </template>
 
 <script>
+import loadingSvg from '@/components/UI/form/loading.vue'
 export default {
   data () {
     return {
@@ -68,6 +71,9 @@ export default {
   },
   beforeDestroy () {
     this.$store.dispatch('userAuth/cleanError')
+  },
+  components: {
+    loadingSvg
   }
 }
 </script>

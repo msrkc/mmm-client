@@ -7,7 +7,7 @@ import NotFound from '@/components/UI/NotFound.vue'
 import Welcome from '@/components/Dashboard/Welcome.vue'
 
 import Dashboard from '@/components/Dashboard.vue'
-import DashboardHome from '@/components/Dashboard/DashboardHome.vue'
+// import DashboardHome from '@/components/Dashboard/DashboardHome.vue'
 import CompanyInformation from '@/components/Dashboard/Company/CompanyInformation.vue'
 
 Vue.use(Router)

@@ -78,6 +78,10 @@
         border-radius: 30px;
       }
     }
+
+    &-loading {
+      background-color: #FFD682;
+    }
   }
 
   &__error {

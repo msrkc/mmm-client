@@ -87,7 +87,7 @@
               <span>50+</span>
               </label>
             </div>
-            <button class="btn login__box-loginForm-onSubmit">
+            <button class="btn login__box-loginForm-onSubmit" @click.prevent="formHandler">
               Rozpocznij
             </button>
           </div>
@@ -106,6 +106,9 @@ export default {
     }
   },
   methods: {
+    formHandler () {
+      console.log('form')
+    },
     falseLoading () {
       setTimeout(() => {
         this.isLoading = false
