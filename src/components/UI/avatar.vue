@@ -44,7 +44,7 @@ export default {
     textStyle () {
       return {
         fill: 'rgba(255, 255, 255, .7)',
-        fontFamily: "'Lucida Console', Monaco, monospace",
+        fontFamily: "'Arial', monospace",
         fontSize: `${this.size * 0.65}px`
       }
     }

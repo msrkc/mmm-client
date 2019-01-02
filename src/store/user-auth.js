@@ -82,14 +82,22 @@ const actions = {
   cleanError ({ commit }) {
     commit('showError', '')
   },
-  tryAutoLogin ({ commit }) {
+  tryAutoLogin ({ commit, dispatch }) {
     const token = localStorage.getItem('token')
     if (!token) {
       return
     }
-    commit('authUser', {
-      token: token
-    })
+    axios.get('', { headers: { 'Authorization': 'Token ' + token } })
+      .then(response => {
+        if (response.status === 200) {
+          commit('authUser', {
+            token: token
+          })
+        }
+      })
+      .catch(() => {
+        dispatch('logout')
+      })
   }
 }
 
