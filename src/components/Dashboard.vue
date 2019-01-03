@@ -1,7 +1,7 @@
 <template>
 <div>
   dashboard
-<router-view></router-view>
+<router-view v-if="isAuth"></router-view>
 </div>
 </template>
 
@@ -10,6 +10,11 @@ export default {
   data () {
     return {
 
+    }
+  },
+  computed: {
+    isAuth () {
+      return this.$store.getters['userAuth/isAuth']
     }
   }
 }

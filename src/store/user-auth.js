@@ -89,11 +89,9 @@ const actions = {
     }
     axios.get('', { headers: { 'Authorization': 'Token ' + token } })
       .then(response => {
-        if (response.status === 200) {
-          commit('authUser', {
-            token: token
-          })
-        }
+        commit('authUser', {
+          token: token
+        })
       })
       .catch(() => {
         dispatch('logout')
