@@ -1,5 +1,4 @@
 <template>
-<transition name="fade" mode="out-in">
   <div>
     <div class="login" v-if="isLoading">
       <div class="loading">
@@ -100,7 +99,7 @@
       </div>
     </div>
   </div>
-</transition>
+
 </template>
 
 <script>

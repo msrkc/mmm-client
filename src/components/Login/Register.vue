@@ -63,19 +63,19 @@ export default {
     validate () {
       const errors = this.$store.getters['userAuth/errors']
       if (errors.email) {
-        this.formData.email = ''
-        this.formData.password = ''
         this.error = true
         return errors.email[0]
       } else if (errors.password) {
-        this.formData.email = ''
-        this.formData.password = ''
         this.error = true
         return errors.password[0]
       }
     },
     onSubmit () {
       this.$store.dispatch('userAuth/signup', this.formData)
+      setTimeout(() => {
+        this.formData.email = ''
+        this.formData.password = ''
+      }, 1500)
       setTimeout(() => {
         this.$store.dispatch('userAuth/cleanError')
         this.error = false

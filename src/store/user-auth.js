@@ -92,11 +92,6 @@ const actions = {
     commit('authUser', {
       token: token
     })
-  },
-  getClient () {
-    axios.get('/')
-      .then(({ data }) => { console.log(data) })
-      .catch(err => { console.log(err) })
   }
 }
 
