@@ -1,6 +1,13 @@
 # mmm-client
 
+### api url
+
+```
+https://api.makemymind.com/client
+```
+
 ## Project setup
+
 ```
 yarn install
 ```
