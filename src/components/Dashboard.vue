@@ -16,6 +16,9 @@ export default {
     isAuth () {
       return this.$store.getters['userAuth/isAuth']
     }
+  },
+  created () {
+    this.$store.dispatch('userAuth/getClient')
   }
 }
 </script>

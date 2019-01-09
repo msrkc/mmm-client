@@ -47,6 +47,7 @@ const actions = {
         })
         commit('process', 0)
         localStorage.setItem('token', data.token)
+        axios.defaults.headers.common['Authorization'] = 'Token ' + data.token
         router.push('/')
       })
       .catch(error => {
@@ -65,6 +66,7 @@ const actions = {
         })
         commit('process', 0)
         localStorage.setItem('token', data.token)
+        axios.defaults.headers.common['Authorization'] = 'Token ' + data.token
         router.push('/')
       })
       .catch(error => {
@@ -87,15 +89,14 @@ const actions = {
     if (!token) {
       return
     }
-    axios.get('', { headers: { 'Authorization': 'Token ' + token } })
-      .then(response => {
-        commit('authUser', {
-          token: token
-        })
-      })
-      .catch(() => {
-        dispatch('logout')
-      })
+    commit('authUser', {
+      token: token
+    })
+  },
+  getClient () {
+    axios.get('/')
+      .then(({ data }) => { console.log(data) })
+      .catch(err => { console.log(err) })
   }
 }
 
