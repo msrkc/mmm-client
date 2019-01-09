@@ -1,0 +1,12 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="30">
+	<defs>
+		<clipPath id="clip_0">
+			<path d="M21 7L22 7C23.1 7 24 7.9 24 9L24 23C24 24.1 23.1 25 22 25L8 25C6.89 25 6 24.1 6 23L6.01 9C6.01 7.9 6.89 7 8 7L9 7L9 5L11 5L11 7L19 7L19 5L21 5L21 7ZM22 23L22 12L8 12L8 23L22 23ZM10 14L15 14L15 19L10 19L10 14Z" clip-rule="evenodd"/>
+		</clipPath>
+	</defs>
+	<g clip-path="url(#clip_0)">
+		<path fill="rgb(255,255,255)" stroke="none" transform="translate(3 3)" d="M0 0L24 0L24 24L0 24L0 0Z"/>
+	</g>
+
+</svg>

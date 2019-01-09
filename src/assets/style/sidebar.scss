@@ -26,6 +26,40 @@
       margin: 3px 0;
     }
   }
+
+  .icons {
+    display: flex;
+    flex-direction: column;
+
+    &__item {
+      width: 7rem;
+      height: 7rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 1s;
+
+      &:hover {
+        img {
+          opacity: 1;
+        }
+      }
+
+      img {
+        width: 30px;
+        height: 30px;
+        opacity: .2;
+      }
+    }
+
+    &-active {
+      background-color: #F1C50F;
+
+      img {
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .onSidebar {
