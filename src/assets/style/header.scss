@@ -4,9 +4,12 @@
   height: 9rem;
   display: flex;
   justify-content: space-between;
+  top: 0%;
+  z-index: 100;
+  border-bottom: 1px solid rgb(245, 245, 245);
 
   &__logo {
-    margin-left: 5rem;
+    padding-left: 5rem;
     display: flex;
     border-right: 1px $lightgrey-border solid;
     align-items: center;
@@ -14,7 +17,7 @@
   }
 
   &__buttons {
-    margin-right: 5rem;
+    padding-right: 5rem;
     align-items: center;
     display: flex;
 

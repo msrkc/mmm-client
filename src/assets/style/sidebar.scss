@@ -1,0 +1,35 @@
+.sidebar {
+  background-color: rgb(49, 57, 76);
+  position: fixed;
+  left: 0%;
+  top: 0%;
+  height: 100%;
+  width: 7rem;
+  z-index: 101;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .burger {
+    height: 9rem;
+    border-bottom: 1px solid rgb(70, 77, 94);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &-bar {
+      width: 30px;
+      height: 3px;
+      background-color: white;
+      margin: 3px 0;
+    }
+  }
+}
+
+.onSidebar {
+  position: fixed;
+  margin-left: 7rem;
+  padding-right: 5rem;
+}

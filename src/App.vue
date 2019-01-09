@@ -1,20 +1,20 @@
 <template>
   <div id="app">
-    <compHeader/>
-    <div v-if="$route.name !== 'welcome' && isAuth">sidebar</div>
+    <compSidebar v-if="$route.name !== 'welcome' && isAuth"/>
+    <compHeader :class="{'onSidebar': $route.name !== 'welcome' && isAuth}"/>
     <router-view/>
     <footer class="footer">Copyrights 2018 | Make my mind Sp z o.o.</footer>
   </div>
 </template>
 
-<style lang="scss" src="@/assets/main.scss">
-</style>
-
 <script>
 import compHeader from '@/components/UI/Header.vue'
+import compSidebar from '@/components/UI/Sidebar.vue'
+
 export default {
   components: {
-    compHeader
+    compHeader,
+    compSidebar
   },
   computed: {
     isAuth () {
@@ -26,3 +26,6 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" src="@/assets/main.scss">
+</style>

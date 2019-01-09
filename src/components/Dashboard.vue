@@ -1,8 +1,8 @@
 <template>
-<div style="font-size:1.5rem; margin:0 auto; width:400px;">
+<div style="font-size:1.5rem; margin:0 auto; width:400px;margin-top:12rem">
   <a href="/welcome" rel="noopener noreferrer">welcome page</a>
   <pre>
-{{client}}
+    {{client}}
   </pre>
 
 <router-view v-if="isAuth"></router-view>
