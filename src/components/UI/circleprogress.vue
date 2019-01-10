@@ -1,6 +1,6 @@
 <template>
 <div>
-  <svg class="stat-circle" width="90" viewBox="0 0 20 20">
+  <svg class="stat-circle" width="70" viewBox="0 0 20 20">
         <circle class="bg" cx="10" cy="10" r="8"></circle>
         <circle class="progress" cx="10" cy="10" r="8" :style="{'stroke-dashoffset':calc}"></circle>
         <circle class="dot" :cx="dotx" :cy="doty" r="1"></circle>

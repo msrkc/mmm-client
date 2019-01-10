@@ -1,9 +1,9 @@
 <template>
-<div style="font-size:1.5rem; margin:0 auto; width:400px;margin-top:12rem">
-  <a href="/welcome" rel="noopener noreferrer">welcome page</a>
-  <pre>
-    {{client}}
-  </pre>
+<div>
+  <div style="position:absolute;top:20%;left:7%;font-size:1.2rem">
+    <router-link to="/welcome">welcome page</router-link> <br>
+    <router-link to="/dashboard/information">company information edit page</router-link>
+  </div>
 
 <router-view v-if="isAuth"></router-view>
 </div>

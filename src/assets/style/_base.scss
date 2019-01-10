@@ -36,9 +36,8 @@ input {
 }
 
 .footer {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
+  position: absolute;
+  bottom: 0;
+  margin-left: 50%;
+  transform: translateX(-50%)
 }
