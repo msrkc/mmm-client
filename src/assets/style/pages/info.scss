@@ -1,8 +1,9 @@
 .companyInfo {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
   max-width: 80rem;
+  width: auto;
+  display: flex;
+  margin: auto auto;
+  flex-direction: column;
   margin-top: 10rem;
 
   .editInfo {
@@ -27,6 +28,10 @@
           color: #B3B3B3;
           font-weight: 200;
         }
+      }
+
+      &--content {
+        padding: 2rem;
       }
     }
   }

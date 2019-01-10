@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="container">
     <compSidebar v-if="$route.name !== 'welcome' && isAuth"/>
     <compHeader :class="{'onSidebar': $route.name !== 'welcome' && isAuth}"/>
     <router-view/>

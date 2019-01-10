@@ -10,7 +10,7 @@
         <h4>Dzięki tym informacjom dopasujemy idealnych kandydatów!</h4>
       </div>
     </div>
-    <div slot="contentAcc">
+    <div slot="contentAcc" class="editInfo-head--content">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, voluptate tenetur, vel laborum explicabo ea adipisci officia laboriosam officiis sequi accusantium nisi earum dolor ratione? Earum velit repellendus necessitatibus asperiores.
       <br>
       <button @click.prevent="handle('second')">next step</button>
@@ -24,7 +24,7 @@
         <h4>Dzięki tym informacjom dopasujemy idealnych kandydatów!</h4>
       </div>
     </div>
-    <div slot="contentAcc">
+    <div slot="contentAcc" class="editInfo-head--content">
       Second ipsum dolor sit amet consectetur adipisicing elit. Maxime, voluptate tenetur, vel laborum explicabo ea adipisci officia laboriosam officiis sequi accusantium nisi earum dolor ratione? Earum velit repellendus necessitatibus asperiores.
     </div>
   </compAccordion>
@@ -36,7 +36,7 @@
         <h4>Dzięki tym informacjom dopasujemy idealnych kandydatów!</h4>
       </div>
     </div>
-    <div slot="contentAcc">
+    <div slot="contentAcc" class="editInfo-head--content">
       Third ipsum dolor sit amet consectetur adipisicing elit. Maxime, voluptate tenetur, vel laborum explicabo ea adipisci officia laboriosam officiis sequi accusantium nisi earum dolor ratione? Earum velit repellendus necessitatibus asperiores.
     </div>
   </compAccordion>
