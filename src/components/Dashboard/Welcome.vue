@@ -21,40 +21,47 @@
             <input
                 type="text"
                 placeholder="Wpisz nazwę firmy"
+                id="company_name"
+                v-model="formData.company_name"
               >
             <span class="login-welcome-text">Ilu pracowników zatrudnia Twoja firma?</span>
             <div class="login-radio-img">
               <input
                   type="radio" name="company_size"
-                  id="10" class="input-hidden" value="10" />
+                  id="10" class="input-hidden" value="<10"
+                  v-model="formData.company_size" />
               <label for="10">
                 <img src="@/assets/img/form/welcome/10.png" />
                 <span>10</span>
               </label>
-              <input checked="checked"
+              <input
                   type="radio" name="company_size"
-                  id="50" class="input-hidden" />
+                  id="50" class="input-hidden" value="10-49"
+                  v-model="formData.company_size" />
               <label for="50">
               <img src="@/assets/img/form/welcome/50.png"/>
               <span>10-50</span>
               </label>
               <input
                   type="radio" name="company_size"
-                  id="150" class="input-hidden" />
+                  id="150" class="input-hidden" value="50-149"
+                  v-model="formData.company_size" />
               <label for="150">
               <img src="@/assets/img/form/welcome/150.png"/>
               <span>50-150</span>
               </label>
               <input
                   type="radio" name="company_size"
-                  id="500" class="input-hidden" />
+                  id="500" class="input-hidden" value="150-499"
+                  v-model="formData.company_size" />
               <label for="500">
               <img src="@/assets/img/form/welcome/500.png"/>
               <span>150-500</span>
               </label>
               <input
                   type="radio" name="company_size"
-                  id="500plus" class="input-hidden" />
+                  id="500plus" class="input-hidden" value=">500"
+                  v-model="formData.company_size" />
               <label for="500plus">
               <img src="@/assets/img/form/welcome/500plus.png"/>
               <span>500+</span>
@@ -63,29 +70,33 @@
             <span class="login-welcome-text">Ile stanowisk planujesz otworzyć w ciągu najbliższych 6 miesięcy?</span>
             <div class="login-radio-img">
               <input
-                  type="radio" name="company_size_plan"
-                  id="p10" class="input-hidden" />
+                  type="radio" name="employees_to_hire"
+                  id="p10" class="input-hidden" value="<10"
+                  v-model="formData.employees_to_hire" />
               <label for="p10">
                 <img src="@/assets/img/form/welcome/p10.png" />
                 <span>10</span>
               </label>
               <input checked="checked"
-                  type="radio" name="company_size_plan"
-                  id="p20" class="input-hidden" />
+                  type="radio" name="employees_to_hire"
+                  id="p20" class="input-hidden" value="10-20"
+                  v-model="formData.employees_to_hire" />
               <label for="p20">
               <img src="@/assets/img/form/welcome/p20.png"/>
               <span>10-20</span>
               </label>
               <input
-                  type="radio" name="company_size_plan"
-                  id="p50" class="input-hidden" />
+                  type="radio" name="employees_to_hire"
+                  id="p50" class="input-hidden" value="20-49"
+                  v-model="formData.employees_to_hire" />
               <label for="p50">
               <img src="@/assets/img/form/welcome/p50.png"/>
               <span>20-50</span>
               </label>
               <input
-                  type="radio" name="company_size_plan"
-                  id="p50plus" class="input-hidden" />
+                  type="radio" name="employees_to_hire"
+                  id="p50plus" class="input-hidden" value=">50"
+                  v-model="formData.employees_to_hire" />
               <label for="p50plus">
               <img src="@/assets/img/form/welcome/p50plus.png"/>
               <span>50+</span>
@@ -106,17 +117,22 @@
 export default {
   data () {
     return {
-      isLoading: true
+      isLoading: true,
+      formData: {
+        company_name: '',
+        employees_to_hire: '',
+        company_size: ''
+      }
     }
   },
   methods: {
     formHandler () {
-      console.log('form')
+      this.$store.dispatch('clientInfo/welcomePatch', this.formData)
     },
     falseLoading () {
       setTimeout(() => {
         this.isLoading = false
-      }, 3000)
+      }, 300)
     }
   },
   mounted () {

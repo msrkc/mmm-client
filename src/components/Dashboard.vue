@@ -14,9 +14,6 @@ export default {
   computed: {
     isAuth () {
       return this.$store.getters['userAuth/isAuth']
-    },
-    client () {
-      return this.$store.getters['clientInfo/client']
     }
   },
   created () {

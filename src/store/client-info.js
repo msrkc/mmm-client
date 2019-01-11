@@ -17,6 +17,12 @@ const mutations = {
 }
 
 const actions = {
+  welcomePatch ({ commit }, payload) {
+    axios.patch('/', { ...payload })
+      .then(({ data }) => {
+        console.log(data)
+      })
+  },
   getClient ({ commit }) {
     axios.get('/')
       .then(({ data }) => {

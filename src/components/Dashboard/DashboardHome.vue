@@ -1,6 +1,7 @@
 <template>
-<div style="position:absolute;transform:translate(-50%,-50%);left:50%;top:50%;font-size:3rem;">
-home dashboard
+<div style="margin:0 auto; width:600px; margin-top:12rem; text-align:center">
+<h1>home dashboard</h1>
+<pre style="font-size:1.3rem; text-align:left;">{{client}}</pre>
 </div>
 </template>
 
@@ -9,6 +10,11 @@ export default {
   data () {
     return {
 
+    }
+  },
+  computed: {
+    client () {
+      return this.$store.getters['clientInfo/client']
     }
   }
 }
