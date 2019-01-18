@@ -11,8 +11,14 @@
       </div>
     </div>
     <div slot="contentAcc" class="editInfo-head--content">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, voluptate tenetur, vel laborum explicabo ea adipisci officia laboriosam officiis sequi accusantium nisi earum dolor ratione? Earum velit repellendus necessitatibus asperiores.
-      <br>
+      <div style="width:50rem;">
+        <multiselect v-model="selected" :options="options"></multiselect>
+        <br><br>
+        <multiselect v-model='valueMulti' tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="name" track-by="code" :options="optionsMulti" :multiple="true" :taggable="true" @tag="addTag" open-direction="bottom"></multiselect>
+
+      </div>
+
+      <br><br><br><br><br><br><br>
       <button @click.prevent="handle('second')">next step</button>
     </div>
   </compAccordion>
@@ -46,9 +52,29 @@
 <script>
 import CircleProgress from '@/components/UI/circleprogress.vue'
 import compAccordion from '@/components/UI/accordion.vue'
+import Multiselect from 'vue-multiselect'
 export default {
   data () {
     return {
+      selected: null,
+      options: ['list', 'of', 'options'],
+      valueMulti: [{
+        name: 'Javascript',
+        code: 'js'
+      }],
+      optionsMulti: [{
+        name: 'Vue.js',
+        code: 'vu'
+      },
+      {
+        name: 'Javascript',
+        code: 'js'
+      },
+      {
+        name: 'Open Source',
+        code: 'os'
+      }
+      ],
       acc: {
         first: true,
         second: false,
@@ -70,11 +96,20 @@ export default {
         this.acc.third = !this.acc.third
         this.acc.first = this.acc.second = false
       }
+    },
+    addTag (newTag) {
+      const tag = {
+        name: newTag,
+        code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+      }
+      this.optionsMulti.push(tag)
+      this.valueMulti.push(tag)
     }
   },
   components: {
     CircleProgress,
-    compAccordion
+    compAccordion,
+    Multiselect
   }
 }
 </script>
