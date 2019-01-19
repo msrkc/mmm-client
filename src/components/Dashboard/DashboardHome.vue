@@ -1,5 +1,5 @@
 <template>
-<div style="margin:0 auto; width:600px; margin-top:12rem; text-align:center">
+<div style="margin:10rem 0;">
 <h1>home dashboard</h1>
 <pre style="font-size:1.3rem; text-align:left;">{{client}}</pre>
 </div>
@@ -16,6 +16,9 @@ export default {
     client () {
       return this.$store.getters['clientInfo/client']
     }
+  },
+  created () {
+    this.$store.dispatch('clientInfo/getClient')
   }
 }
 </script>

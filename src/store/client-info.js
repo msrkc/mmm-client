@@ -1,18 +1,25 @@
 import axios from 'axios'
 
 const state = {
-  client: {}
+  client: {},
+  values: {}
 }
 
 const getters = {
   client (state) {
     return state.client
+  },
+  values (state) {
+    return state.values
   }
 }
 
 const mutations = {
-  getClient (state, clientInfo) {
+  setClient (state, clientInfo) {
     state.client = clientInfo
+  },
+  setValues (state, values) {
+    state.values = values
   }
 }
 
@@ -26,7 +33,14 @@ const actions = {
   getClient ({ commit }) {
     axios.get('/')
       .then(({ data }) => {
-        commit('getClient', data)
+        commit('setClient', data)
+      })
+      .catch(err => { console.log(err) })
+  },
+  getValues ({ commit }) {
+    axios.get('/values')
+      .then(({ data }) => {
+        commit('setValues', data)
       })
       .catch(err => { console.log(err) })
   }

@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="dashboard">
 <router-view v-if="isAuth"></router-view>
 </div>
 </template>

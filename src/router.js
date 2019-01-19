@@ -36,8 +36,8 @@ export default new Router({
     { path: '/dashboard',
       component: Dashboard,
       children: [
-        { path: '/', component: DashboardHome },
-        { path: 'information', component: CompanyInformation }
+        { path: '/', component: DashboardHome, name: 'DashboardHome' },
+        { path: 'info', component: CompanyInformation, name: 'CompanyInformation' }
       ],
       ...guardNoUser },
     {

@@ -1,14 +1,15 @@
 .sidebar {
   background-color: rgb(49, 57, 76);
   position: fixed;
-  left: 0%;
-  top: 0%;
+  left: 0;
+  top: 0;
   height: 100%;
   width: 7rem;
   z-index: 101;
   display: flex;
   flex-direction: column;
   align-items: center;
+  align-self: flex-start;
 
   .burger {
     height: 9rem;
