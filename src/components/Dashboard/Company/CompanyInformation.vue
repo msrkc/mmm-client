@@ -55,24 +55,82 @@
           </div>
         </div>
         <div class="editInfo__content-person">
-        <span class="editInfo__content-dark-text">
-          Z kim kontaktowac sie w sprawie rozliczen?</span>
+          <span class="editInfo__content-dark-text">
+            Z kim kontaktowac sie w sprawie rozliczen?</span>
           <input class="normal" type="text" id="payment_contact_name" placeholder="Imie i nazwisko" v-model="formData.payment_contact_name">
           <div class="editInfo__content-person_column">
-          <input class="normal" type="text" id="payment_contact_email" placeholder="Adres e-mail" v-model="formData.payment_contact_email">
-          <input class="normal" type="text" id="payment_contact_phone_number" placeholder="Nr telefonu" v-model="formData.payment_contact_phone_number">
+            <input class="normal" type="text" id="payment_contact_email" placeholder="Adres e-mail" v-model="formData.payment_contact_email">
+            <input class="normal" type="text" id="payment_contact_phone_number" placeholder="Nr telefonu" v-model="formData.payment_contact_phone_number">
           </div>
           <span class="editInfo__content-dark-text">
-          Z kim kontaktowac sie w sprawie wspolpracy?</span>
+            Z kim kontaktowac sie w sprawie wspolpracy?</span>
           <div class="editInfo__content-person_column">
-          <input class="normal" type="text" id="cooperation_contact_name" placeholder="Imie i Nazwisko" v-model="formData.cooperation_contact_name">
-          <input class="normal" type="text" id="cooperation_contact_position" placeholder="Stanowisko" v-model="formData.cooperation_contact_position">
+            <input class="normal" type="text" id="cooperation_contact_name" placeholder="Imie i Nazwisko" v-model="formData.cooperation_contact_name">
+            <input class="normal" type="text" id="cooperation_contact_position" placeholder="Stanowisko" v-model="formData.cooperation_contact_position">
           </div>
           <div class="editInfo__content-person_column">
-          <input class="normal" type="text" id="cooperation_contact_email" placeholder="Adres e-mail" v-model="formData.cooperation_contact_email">
-          <input class="normal" type="text" id="cooperation_contact_phone_number" placeholder="Nr telefonu" v-model="formData.cooperation_contact_phone_number">
+            <input class="normal" type="text" id="cooperation_contact_email" placeholder="Adres e-mail" v-model="formData.cooperation_contact_email">
+            <input class="normal" type="text" id="cooperation_contact_phone_number" placeholder="Nr telefonu" v-model="formData.cooperation_contact_phone_number">
+          </div>
+          <div class="editInfo__content-forma-kontaktu">
+            <span class="editInfo__content-dark-text">
+              Preferowana forma kontaktu</span>
+            <div class="radio">
+              <input id="telefon" type="checkbox" value="Telefon" v-model="formData.contact_preference" />
+              <label for="telefon">Telefon</label>
+            </div>
+            <div class="radio">
+              <input id="e-mail" type="checkbox" value="E-mail" v-model="formData.contact_preference" />
+              <label for="e-mail">E-mail</label>
+            </div>
+            <div class="radio">
+              <input id="sms" type="checkbox" value="SMS" v-model="formData.contact_preference" />
+              <label for="sms">SMS</label>
+            </div>
+          </div>
+        </div>
+        <div class="editInfo__content-hr">
+          <div class="editInfo__content-hr_column_toggle">
+            <span class="editInfo__content-dark-text">
+              Dzial HR</span>
+            <div class="toggle">
+              <label class="switch">
+                <input type="checkbox" v-model="formData.hr_department">
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+          <div class="editInfo__content-hr_column_radio">
+           <span class="editInfo__content-dark-text">
+               Wybierz produkty ktora moga byc interesujace dla ciebie w przyslosci </span>
+               <div class="radios">
+            <div class="radio">
+              <input id="employer_branding" type="checkbox" value="Employer Branding" v-model="formData.interest_in_products" />
+              <label for="employer_branding">Employer Branding</label>
+            </div>
+            <div class="radio">
+              <input id="audyt" type="checkbox"/>
+              <label for="audyt">Audyt</label>
+            </div>
+            <div class="radio">
+              <input id="szkolenia" type="checkbox"/>
+              <label for="szkolenia">Szkolenia</label>
+            </div>
+            <div class="radio">
+              <input id="rekrutacja" type="checkbox"/>
+              <label for="rekrutacja">Rekrutacja</label>
+            </div>
+            <div class="radio">
+              <input id="Badania" type="checkbox"/>
+              <label for="Badania">Badania</label>
+            </div>
+            <div class="radio">
+              <input id="escape" type="checkbox" v-model="formData.interest_in_products" value="Escape Center" />
+              <label for="escape">Escape Center</label>
+            </div>
           </div>
 
+          </div>
         </div>
         <button @click.prevent="handle('second')" style="align-self:flex-end;justify-self:flex-end;">next step</button>
       </div>
@@ -98,19 +156,7 @@
         </div>
       </div>
       <div slot="contentAcc" class="editInfo__content">
-        <multiselect v-model="formData.country" :options="options.country" open-direction="bottom">
-          <template slot="option" slot-scope="props">
-            {{props.option[0]}}
-          </template>
-        </multiselect>
-        <multiselect v-model="formData.legal_form" :options="options.legal_form" open-direction="bottom">
-          <template slot="singleLabel" slot-scope="props"> {{props.option}}</template>
-          <template slot="option" slot-scope="props">
-            {{props.option[1]}}
-          </template>
-        </multiselect>
-        <br><br>
-        <multiselect v-model='valueMulti' tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="name" track-by="code" :options="optionsMulti" :multiple="true" :taggable="true" open-direction="bottom"></multiselect>
+
       </div>
     </compAccordion>
   </div>
@@ -141,23 +187,6 @@ export default {
         country: [],
         legal_form: []
       },
-      valueMulti: [{
-        name: 'Javascript',
-        code: 'js'
-      }],
-      optionsMulti: [{
-        name: 'Vue.js',
-        code: 'vu'
-      },
-      {
-        name: 'Javascript',
-        code: 'js'
-      },
-      {
-        name: 'Open Source',
-        code: 'os'
-      }
-      ],
       acc: {
         first: true,
         second: false,

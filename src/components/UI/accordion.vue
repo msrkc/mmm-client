@@ -1,5 +1,5 @@
 <template>
-<div class="companyInfo__accordion">
+<div class="accordion">
   <div class="message" :class="accordionClasses">
     <div class="message-header">
       <slot name="titleAcc"></slot>
@@ -47,3 +47,37 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.accordion {
+    .message {
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      background: white;
+      margin: 1rem 0;
+      box-shadow: 1px 2px 7px 2px rgba(209, 211, 235, .5);
+    }
+
+    .message-header {
+      cursor: pointer;
+      border-bottom: 2px solid #F5F5F5;
+      padding: .5rem;
+    }
+
+    .message-body {
+      padding: 0;
+      max-height: 100rem;
+      overflow: hidden;
+      transition: 0.3s ease all;
+    }
+
+    .is-closed .message-body {
+      max-height: 0;
+    }
+
+    .message-content {
+      padding: 0;
+    }
+  }
+</style>
