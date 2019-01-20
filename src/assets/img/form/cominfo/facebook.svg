@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="9" height="18" viewBox="0 0 9 18">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="facebook_icon" data-name="facebook icon" d="M5.842,18V9.789H8.5l.395-3.2H5.842V4.547c0-.925.248-1.557,1.526-1.557H9V.125A20.41,20.41,0,0,0,6.625,0C4.269,0,2.663,1.495,2.663,4.234V6.6H0V9.8H2.663V18Z" transform="translate(11 6)" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="_3._Icons_2.5_Social_ic_facebook" data-name="3. Icons/2.5 Social/ic_facebook" transform="translate(-11 -6)">
+    <path id="facebook_icon-2" data-name="facebook icon" d="M5.842,18V9.789H8.5l.395-3.2H5.842V4.547c0-.925.248-1.557,1.526-1.557H9V.125A20.41,20.41,0,0,0,6.625,0C4.269,0,2.663,1.495,2.663,4.234V6.6H0V9.8H2.663V18Z" transform="translate(11 6)" fill="none"/>
+    <g clip-path="url(#clip-path)">
+      <g id="_Color_Icon" data-name="↳ Color Icon" transform="translate(3 3)">
+        <rect id="_Color_Icon_background" data-name="↳ Color Icon background" width="24" height="24" fill="rgba(0,0,0,0)"/>
+        <rect id="Gray_85" data-name="Gray 85" width="24" height="24" fill="#d8d8d8"/>
+      </g>
+    </g>
+  </g>
+</svg>

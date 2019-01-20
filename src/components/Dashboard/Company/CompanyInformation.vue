@@ -11,36 +11,44 @@
       <div slot="contentAcc" class="editInfo__content">
         <div class="editInfo__content-basic_info">
           <div class="editInfo__content-basic_info__column">
-            <div class=".editInfo__content-form_label">
+            <div class="editInfo__content-form_label">
               <label for="company_name" class="left">Nazwa Firmy</label>
               <input class="normal" type="text" id="company_name" placeholder="Wpisz nazwe firma" v-model="formData.company_name">
             </div>
-            <div class=".editInfo__content-form_label">
+            <div class="editInfo__content-form_label">
               <label for="legal_form" class="left">Forma Prawna</label>
-              <input class="normal" type="text" id="legal_form" placeholder="Wpisz nazwe firma" v-model="formData.legal_form">
+              <!-- <input class="normal" type="text" id="legal_form" placeholder="Wpisz nazwe firma" v-model="formData.legal_form"> -->
+              <div style="width:20rem;display:inline-flex;margin-bottom:1.5rem;">
+                <multiselect v-model="formData.legal_form" :options="options.legal_form" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy">
+                  <template slot="option" slot-scope="props">
+                    {{props.option[1]}}
+                  </template>
+                </multiselect>
+              </div>
+
             </div>
-            <div class=".editInfo__content-form_label">
+            <div class="editInfo__content-form_label">
               <label for="address" class="left">Adres</label>
               <input class="normal" type="text" id="address" placeholder="Wpisz address" v-model="formData.address">
             </div>
-            <div class=".editInfo__content-form_label">
+            <div class="editInfo__content-form_label">
               <label for="city" class="left">Miasto</label>
               <input class="normal" type="text" id="city" placeholder="Wpisz miasto" v-model="formData.city">
             </div>
           </div>
 
           <div class="editInfo__content-basic_info__column">
-            <div class=".editInfo__content-form_label">
+            <div class="editInfo__content-form_label">
               <label for="capital_group_name">Nazwa grupy kapitałowej</label>
-              <input class="normal" type="text" id="capital_group_name" placeholder="Wpisz " v-model="formData.capital_group_name" style="width:22rem">
+              <input class="normal" type="text" id="capital_group_name" placeholder="Wpisz " v-model="formData.capital_group_name">
             </div>
-            <div class=".editInfo__content-form_label">
+            <div class="editInfo__content-form_label">
               <label for="date_of_creation" class="right">Rok powstania</label>
               <input class="normal" type="number" id="capital_group_name" placeholder="RRRR" v-model="formData.date_of_creation" style="width:12rem">
             </div>
-            <div class=".editInfo__content-form_label">
+            <div class="editInfo__content-form_label">
               <label for="country" class="right">Kraj</label>
-              <div style="width:26rem;display:inline-flex;margin-bottom:1.5rem;">
+              <div style="width:24rem;display:inline-flex;margin-bottom:1.5rem;">
                 <multiselect v-model="formData.country" :options="options.country" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy">
                   <template slot="option" slot-scope="props">
                     {{props.option[0]}}
@@ -48,7 +56,7 @@
                 </multiselect>
               </div>
             </div>
-            <div class=".editInfo__content-form_label">
+            <div class="editInfo__content-form_label">
               <label for="postal_code" class="right">Kod pocztowy</label>
               <input class="normal" type="text" id="postal_code" placeholder="Wpisz" v-model="formData.postal_code">
             </div>
@@ -101,34 +109,34 @@
             </div>
           </div>
           <div class="editInfo__content-hr_column_radio">
-           <span class="editInfo__content-dark-text">
-               Wybierz produkty ktora moga byc interesujace dla ciebie w przyslosci </span>
-               <div class="radios">
-            <div class="radio">
-              <input id="employer_branding" type="checkbox" value="Employer Branding" v-model="formData.interest_in_products" />
-              <label for="employer_branding">Employer Branding</label>
+            <span class="editInfo__content-dark-text">
+              Wybierz produkty ktora moga byc interesujace dla ciebie w przyslosci </span>
+            <div class="radios">
+              <div class="radio">
+                <input id="employer_branding" type="checkbox" value="Employer Branding" v-model="formData.interest_in_products" />
+                <label for="employer_branding">Employer Branding</label>
+              </div>
+              <div class="radio">
+                <input id="audyt" type="checkbox" />
+                <label for="audyt">Audyt</label>
+              </div>
+              <div class="radio">
+                <input id="szkolenia" type="checkbox" />
+                <label for="szkolenia">Szkolenia</label>
+              </div>
+              <div class="radio">
+                <input id="rekrutacja" type="checkbox" />
+                <label for="rekrutacja">Rekrutacja</label>
+              </div>
+              <div class="radio">
+                <input id="Badania" type="checkbox" />
+                <label for="Badania">Badania</label>
+              </div>
+              <div class="radio">
+                <input id="escape" type="checkbox" v-model="formData.interest_in_products" value="Escape Center" />
+                <label for="escape">Escape Center</label>
+              </div>
             </div>
-            <div class="radio">
-              <input id="audyt" type="checkbox"/>
-              <label for="audyt">Audyt</label>
-            </div>
-            <div class="radio">
-              <input id="szkolenia" type="checkbox"/>
-              <label for="szkolenia">Szkolenia</label>
-            </div>
-            <div class="radio">
-              <input id="rekrutacja" type="checkbox"/>
-              <label for="rekrutacja">Rekrutacja</label>
-            </div>
-            <div class="radio">
-              <input id="Badania" type="checkbox"/>
-              <label for="Badania">Badania</label>
-            </div>
-            <div class="radio">
-              <input id="escape" type="checkbox" v-model="formData.interest_in_products" value="Escape Center" />
-              <label for="escape">Escape Center</label>
-            </div>
-          </div>
 
           </div>
         </div>
@@ -144,7 +152,95 @@
         </div>
       </div>
       <div slot="contentAcc" class="editInfo__content">
-        Second ipsum dolor sit amet consectetur adipisicing elit. Maxime, voluptate tenetur, vel laborum explicabo ea adipisci officia laboriosam officiis sequi accusantium nisi earum dolor ratione? Earum velit repellendus necessitatibus asperiores.
+        <div class="editInfo__content-firma">
+          <div class="editInfo__content-firma_column" style="display:flex;flex-flow:column;">
+            <label for="opis">Opis firma</label>
+            <textarea name="" id="opis" cols="30" rows="10"></textarea>
+
+            <label for="konk">Czym firma wroznia na konkurencji</label>
+            <textarea id="konk" cols="30" rows="10"></textarea>
+
+            <label for="wartosci">Wartosci firma</label>
+            <div style="width:24rem;display:inline-flex;margin-bottom:1.5rem;">
+              <multiselect v-model="formData.country" :options="options.country" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy">
+                <template slot="option" slot-scope="props">
+                  {{props.option[0]}}
+                </template>
+              </multiselect>
+            </div>
+            <label>Typ kultry organizecjynej</label>
+            <label>Swiadaczenia pozaplacowe</label>
+            <div style="width:24rem;display:inline-flex;margin-bottom:1.5rem;">
+              <multiselect v-model="formData.country" :options="options.country" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy">
+                <template slot="option" slot-scope="props">
+                  {{props.option[0]}}
+                </template>
+              </multiselect>
+            </div>
+          </div>
+          <div class="editInfo__content-firma_column" style="display:flex;flex-flow:column;">
+            <label for="">Oferowane formy wspolpracy</label>
+            <div class="radios">
+              <div class="radio">
+                <input id="uod" type="checkbox" value="uod" />
+                <label for="uod">Umowa o dzieło</label>
+              </div>
+              <div class="radio">
+                <input id="uop" type="checkbox" />
+                <label for="uop">Umowa o pracę</label>
+              </div>
+              <div class="radio">
+                <input id="uz" type="checkbox" />
+                <label for="uz">Umowa zlecenie</label>
+              </div>
+            </div>
+            <div class="toggle-input">
+              <div class="toggle-input-column">
+                <label for="urlop_b2b">Urlop B2B</label>
+                <input id="urlop_b2b" type="number" class="normal" placeholder="Ilosc dni" style="width:15rem;margin-top:1rem">
+              </div>
+              <div class="toggle-input-column">
+                <label>Platny/Bezplatny</label>
+                <div class="toggle">
+                  <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="toggle-input">
+              <div class="toggle-input-column">
+                <label for="chrobowe_b2b">Chrobowe B2B</label>
+                <input type="number" id="chrobowe_b2b" class="normal" placeholder="Ilosc dni" style="width:15rem;margin-top:1rem">
+              </div>
+              <div class="toggle-input-column">
+                <label>Platny/Bezplatny</label>
+                <div class="toggle">
+                  <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="editInfo__content-firma_social">
+                <label>Linki do social media</label>
+                <div class="social-input">
+                  <img src="@/assets/img/form/cominfo/facebook.svg"><input class="normal" type="text" id="facebook" v-model="formData.facebook_url">
+                </div>
+                <div class="social-input">
+                  <img src="@/assets/img/form/cominfo/instagram.svg"> <input class="normal" type="text" id="instagram" v-model="formData.instagram_url">
+                </div>
+                <div class="social-input">
+                  <img src="@/assets/img/form/cominfo/linkedin.svg"><input class="normal" type="text" id="linkedin" v-model="formData.linkedin_url">
+                </div>
+                <div class="social-input">
+                  <img src="@/assets/img/form/cominfo/twitter.svg"><input class="normal" type="text" id="twitter" v-model="formData.twitter_url">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </compAccordion>
     <compAccordion :active="acc.third">
@@ -156,9 +252,16 @@
         </div>
       </div>
       <div slot="contentAcc" class="editInfo__content">
+        <div style="display:flex;flex-flow:column;height:20rem">
+          <multiselect v-model="valueMulti" tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="label" track-by="value" :options="optionsMulti" :multiple="true" :taggable="true" open-direction="bottom"></multiselect>
+
+        </div>
 
       </div>
     </compAccordion>
+    <div style="position:absolute;bottom:5rem;">
+      {{valueMulti}}
+    </div>
   </div>
 </template>
 
@@ -182,7 +285,28 @@ export default {
   },
   data () {
     return {
-      selected: null,
+      valueMulti: [{
+        label: 'Javascript',
+        value: 'js'
+      },
+      {
+        label: 'Open Source',
+        value: 'os'
+      }
+      ],
+      optionsMulti: [{
+        label: 'Vue.js',
+        value: 'vu'
+      },
+      {
+        label: 'Javascript',
+        value: 'js'
+      },
+      {
+        label: 'Open Source',
+        value: 'os'
+      }
+      ],
       options: {
         country: [],
         legal_form: []

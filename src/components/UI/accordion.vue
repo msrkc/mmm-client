@@ -67,7 +67,7 @@ export default {
 
     .message-body {
       padding: 0;
-      max-height: 100rem;
+      max-height: auto;
       overflow: hidden;
       transition: 0.3s ease all;
     }
