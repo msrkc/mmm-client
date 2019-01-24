@@ -16,7 +16,7 @@ export default {
       return this.$store.getters['userAuth/isAuth']
     }
   },
-  created () {
+  mounted () {
     this.$store.dispatch('clientInfo/getClient')
   }
 }

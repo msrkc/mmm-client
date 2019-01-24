@@ -2,7 +2,10 @@ import axios from 'axios'
 
 const state = {
   client: {},
-  values: {}
+  values: {
+    'country': [],
+    'legal_form': []
+  }
 }
 
 const getters = {

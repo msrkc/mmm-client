@@ -1,5 +1,93 @@
+<script>
+import CircleProgress from '@/components/UI/circleprogress.vue'
+import compAccordion from '@/components/UI/accordion.vue'
+import Multiselect from 'vue-multiselect'
+export default {
+  computed: {
+    formData: {
+      get () {
+        return this.$store.state.clientInfo.client
+      },
+      set (value) {
+        this.$store.commit('clientInfo/setClient', value)
+      }
+    },
+    options () {
+      return this.$store.getters['clientInfo/values']
+    },
+    progressBar () {
+      const obj = this.$store.state.clientInfo.client
+      const total = Object.keys(obj).length
+      let status = 0
+      Object.keys(obj).map((item) => {
+        const count = obj[item]
+        if (count !== null && count !== '' && count !== undefined && count.length > 0 && count !== []) {
+          status++
+        }
+        return status
+      })
+      return parseInt(status * 100 / total)
+    }
+  },
+  data () {
+    return {
+      valueMulti: [{
+        label: 'Javascript',
+        value: 'js'
+      },
+      {
+        label: 'Open Source',
+        value: 'os'
+      }
+      ],
+      optionsMulti: [{
+        label: 'Vue.js',
+        value: 'vu'
+      },
+      {
+        label: 'Javascript',
+        value: 'js'
+      },
+      {
+        label: 'Open Source',
+        value: 'os'
+      }
+      ],
+      acc: {
+        first: true,
+        second: false,
+        third: false
+      }
+    }
+  },
+  methods: {
+    handle (item) {
+      let accordions = this.acc
+      Object.keys(accordions).forEach(function (key) {
+        if (key === item) {
+          accordions[key] = !accordions[key]
+        } if (key !== item) {
+          accordions[key] = false
+        }
+      })
+    }
+  },
+  created () {
+    this.$store.dispatch('clientInfo/getValues')
+  },
+  components: {
+    CircleProgress,
+    compAccordion,
+    Multiselect
+  }
+}
+
+</script>
+
 <template>
   <div class="companyInfo">
+    <div style="height:5px;background:orange" :style="{width: progressBar + '%'}"></div>
+    {{progressBar}}
     <compAccordion :active="acc.first">
       <div class="editInfo-head" slot="titleAcc" @click="handle('first')">
         <circle-progress :percentage="0" :number="1" :dotx="5" :doty="4" />
@@ -264,89 +352,3 @@
     </div>
   </div>
 </template>
-
-<script>
-import CircleProgress from '@/components/UI/circleprogress.vue'
-import compAccordion from '@/components/UI/accordion.vue'
-import Multiselect from 'vue-multiselect'
-export default {
-  computed: {
-    formData: {
-      get () {
-        return this.$store.state.clientInfo.client
-      },
-      set (value) {
-        this.$store.commit('clientInfo/setClient', value)
-      }
-    },
-    values () {
-      return this.$store.getters['clientInfo/values']
-    }
-  },
-  data () {
-    return {
-      valueMulti: [{
-        label: 'Javascript',
-        value: 'js'
-      },
-      {
-        label: 'Open Source',
-        value: 'os'
-      }
-      ],
-      optionsMulti: [{
-        label: 'Vue.js',
-        value: 'vu'
-      },
-      {
-        label: 'Javascript',
-        value: 'js'
-      },
-      {
-        label: 'Open Source',
-        value: 'os'
-      }
-      ],
-      options: {
-        country: [],
-        legal_form: []
-      },
-      acc: {
-        first: true,
-        second: false,
-        third: false
-      }
-    }
-  },
-  methods: {
-    handle (item) {
-      if (item === 'first') {
-        this.acc.first = !this.acc.first
-        this.acc.second = this.acc.third = false
-      }
-      if (item === 'second') {
-        this.acc.second = !this.acc.second
-        this.acc.first = this.acc.third = false
-      }
-      if (item === 'third') {
-        this.acc.third = !this.acc.third
-        this.acc.first = this.acc.second = false
-      }
-    }
-  },
-  watch: {
-    values: function (newVal, oldVal) {
-      this.options = newVal
-    }
-  },
-  created () {
-    this.$store.dispatch('clientInfo/getValues')
-  },
-  components: {
-    CircleProgress,
-    compAccordion,
-    Multiselect
-  }
-}
-
-</script>

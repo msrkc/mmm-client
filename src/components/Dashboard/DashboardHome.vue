@@ -16,10 +16,8 @@ export default {
     client () {
       return this.$store.getters['clientInfo/client']
     }
-  },
-  created () {
-    this.$store.dispatch('clientInfo/getClient')
   }
+
 }
 </script>
 
