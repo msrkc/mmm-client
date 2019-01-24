@@ -2,7 +2,7 @@ import axios from 'axios'
 import router from '@/router'
 
 const state = {
-  token: localStorage.getItem('user-token') || '',
+  token: localStorage.getItem('user-token') || null,
   errors: '',
   process: 0
 }

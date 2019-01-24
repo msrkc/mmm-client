@@ -41,7 +41,7 @@ const actions = {
       .catch(err => { console.log(err) })
   },
   getValues ({ commit }) {
-    axios.get('/values')
+    axios.get('/values/')
       .then(({ data }) => {
         commit('setValues', data)
       })
