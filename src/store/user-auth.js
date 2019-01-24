@@ -79,7 +79,7 @@ const actions = {
   logout ({ commit }) {
     commit('clearAuthData')
     localStorage.removeItem('token')
-    router.replace('/login')
+    router.push('/login')
   },
   cleanError ({ commit }) {
     commit('showError', '')
