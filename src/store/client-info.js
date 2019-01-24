@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { HTTP } from '@/http'
 
 const state = {
   client: {},
@@ -28,20 +28,20 @@ const mutations = {
 
 const actions = {
   welcomePatch ({ commit }, payload) {
-    axios.patch('/', { ...payload })
+    HTTP.patch('/', { ...payload })
       .then(({ data }) => {
         console.log(data)
       })
   },
   getClient ({ commit }) {
-    axios.get('/')
+    HTTP.get('/')
       .then(({ data }) => {
         commit('setClient', data)
       })
       .catch(err => { console.log(err) })
   },
   getValues ({ commit }) {
-    axios.get('/values/')
+    HTTP.get('/values/')
       .then(({ data }) => {
         commit('setValues', data)
       })

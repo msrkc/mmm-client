@@ -17,16 +17,16 @@ export default {
     },
     progressBar () {
       const obj = this.$store.state.clientInfo.client
-      const total = Object.keys(obj).length
+      const total = Object.keys(obj).length - 2
       let status = 0
-      Object.keys(obj).map((item) => {
-        const count = obj[item]
-        if (count !== null && count !== '' && count !== undefined && count.length > 0 && count !== []) {
-          status++
+      Object.keys(obj).slice(2, total).map((item) => {
+        const entry = obj[item]
+        if (entry !== null && entry !== '' && entry !== undefined && entry.length > 0 && entry !== []) {
+          ++status
         }
         return status
       })
-      return parseInt(status * 100 / total)
+      return status * 100 / total
     }
   },
   data () {
@@ -87,7 +87,7 @@ export default {
 <template>
   <div class="companyInfo">
     <div style="height:5px;background:orange" :style="{width: progressBar + '%'}"></div>
-    {{progressBar}}
+
     <compAccordion :active="acc.first">
       <div class="editInfo-head" slot="titleAcc" @click="handle('first')">
         <circle-progress :percentage="0" :number="1" :dotx="5" :doty="4" />

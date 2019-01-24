@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { HTTP } from '@/http'
 import router from '@/router'
 
 const state = {
@@ -36,14 +36,14 @@ const mutations = {
 const actions = {
   login ({ commit, state }, payload) {
     commit('process', 1)
-    axios.post('/login/', { ...payload })
+    HTTP.post('/login/', { ...payload })
       .then(({ data }) => {
         commit('authUser', {
           token: data.token
         })
         commit('process', 0)
         localStorage.setItem('token', data.token)
-        axios.defaults.headers.common['Authorization'] = 'Token ' + data.token
+        HTTP.defaults.headers.common['Authorization'] = 'Token ' + data.token
         router.push('/')
       })
       .catch(error => {
@@ -55,14 +55,14 @@ const actions = {
   },
   signup ({ commit }, payload) {
     commit('process', 1)
-    axios.post('/register/', { ...payload })
+    HTTP.post('/register/', { ...payload })
       .then(({ data }) => {
         commit('authUser', {
           token: data.token
         })
         commit('process', 0)
         localStorage.setItem('token', data.token)
-        axios.defaults.headers.common['Authorization'] = 'Token ' + data.token
+        HTTP.defaults.headers.common['Authorization'] = 'Token ' + data.token
         router.push('/')
       })
       .catch(error => {
@@ -75,7 +75,7 @@ const actions = {
   logout ({ commit }) {
     commit('clearAuthData')
     localStorage.removeItem('token')
-    delete axios.defaults.headers.common['Authorization']
+    delete HTTP.defaults.headers.common['Authorization']
     router.push('/login')
   },
   cleanError ({ commit }) {
