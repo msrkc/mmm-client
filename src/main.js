@@ -10,16 +10,16 @@ const token = localStorage.getItem('token')
 if (token) {
   axios.defaults.headers.common['Authorization'] = 'Token ' + token
 }
-axios.interceptors.response.use(
-  response => response,
-  error => {
-    const { status } = error.response
-    if (status === 401) {
-      store.dispatch('userAuth/logout')
-    }
-    return Promise.reject(error)
-  }
-)
+// axios.interceptors.response.use(
+//   response => response,
+//   error => {
+//     const { status } = error.response
+//     if (status === 401) {
+//       store.dispatch('userAuth/logout')
+//     }
+//     return Promise.reject(error)
+//   }
+// )
 Vue.config.productionTip = false
 
 new Vue({

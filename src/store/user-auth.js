@@ -2,7 +2,7 @@ import axios from 'axios'
 import router from '@/router'
 
 const state = {
-  token: null,
+  token: localStorage.getItem('user-token') || '',
   errors: '',
   process: 0
 }
@@ -14,11 +14,7 @@ const getters = {
   process (state) {
     return state.process
   },
-  isAuth (state) {
-    if (state.token) {
-      return true
-    } else { return false }
-  }
+  isAuth: state => !!state.token
 }
 
 const mutations = {
@@ -79,6 +75,7 @@ const actions = {
   logout ({ commit }) {
     commit('clearAuthData')
     localStorage.removeItem('token')
+    delete axios.defaults.headers.common['Authorization']
     router.push('/login')
   },
   cleanError ({ commit }) {
