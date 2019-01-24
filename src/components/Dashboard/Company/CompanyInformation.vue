@@ -72,9 +72,6 @@ export default {
       })
     }
   },
-  mounted () {
-    this.$store.dispatch('clientInfo/getValues')
-  },
   destroyed () {
     this.$store.dispatch('clientInfo/getClient')
   },
