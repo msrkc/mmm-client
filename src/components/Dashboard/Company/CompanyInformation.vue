@@ -75,9 +75,9 @@ export default {
   mounted () {
     this.$store.dispatch('clientInfo/getValues')
   },
-  // destroyed () {
-  //   this.$store.dispatch('clientInfo/getClient')
-  // },
+  destroyed () {
+    this.$store.dispatch('clientInfo/getClient')
+  },
   components: {
     CircleProgress,
     compAccordion,
