@@ -19,16 +19,14 @@
 
             <label for="wartosci">Wartosci firma</label>
             <div style="width:24rem;display:inline-flex;margin-bottom:1.5rem;">
-              <multiselect v-model="formData.country" :options="options.country" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy">
-                <template slot="option" slot-scope="props">
-                  {{props.option.label}}
-                </template>
+             <multiselect :value="companyValuesLabel" v-model="formData.company_values" :options="options.company_values" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Wybierz z listy" label="value" track-by="value" :preselect-first="true" open-direction="top" :show-labels="false">
+                <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
               </multiselect>
             </div>
             <label>Typ kultry organizecjynej</label>
             <label>Swiadaczenia pozaplacowe</label>
             <div style="width:24rem;display:inline-flex;margin-bottom:1.5rem;">
-              <multiselect :value="custom" v-model="formData.benefits" :options="options.benefits" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Wybierz z listy" label="value" track-by="value" :preselect-first="true" open-direction="top" :show-labels="false">
+              <multiselect :value="benefitsLabel" v-model="formData.benefits" :options="options.benefits" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Wybierz z listy" label="value" track-by="value" :preselect-first="true" open-direction="top" :show-labels="false">
                 <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
               </multiselect>
             </div>
@@ -84,7 +82,6 @@
                 <div class="social-input">
                   <img src="@/assets/img/form/cominfo/twitter.svg"><input class="normal" type="text" id="twitter" v-model="formData.twitter_url">
                 </div>
-                {{formData.benefits}}
               </div>
             </div>
           </div>
@@ -112,17 +109,28 @@ export default {
     collapse: function () {
       this.handle('second')
     },
-    custom () {
+    benefitsLabel () {
       const getvalues = this.formData.benefits
       const options = this.options.benefits
       const filteredArray = options.filter(function (itm) {
         return getvalues.indexOf(itm.value) > -1
       })
       this.formData.benefits = filteredArray
+    },
+    companyValuesLabel () {
+      const getvalues = this.formData.company_values
+      const options = this.options.company_values
+      const filteredArray = options.filter(function (itm) {
+        return getvalues.indexOf(itm.value) > -1
+      })
+      this.formData.company_values = filteredArray
     }
   },
   mounted () {
-    this.custom()
+    setTimeout(() => {
+      this.benefitsLabel()
+      this.companyValuesLabel()
+    }, 1000)
   },
   components: {
     CircleProgress,

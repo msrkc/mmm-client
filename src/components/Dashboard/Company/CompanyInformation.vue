@@ -90,6 +90,6 @@ export default {
     <companyInformationFirst :active="acc.first" :formData="formData" :options="options" :handle="handle"></companyInformationFirst>
     <companyInformationSecond :active="acc.second" :formData="formData" :options="options" :handle="handle"></companyInformationSecond>
     <companyInformationThird :active="acc.third" :formData="formData" :options="optionsMulti" :valueMulti="valueMulti" :handle="handle"></companyInformationThird>
-
+    {{formData}}
   </div>
 </template>

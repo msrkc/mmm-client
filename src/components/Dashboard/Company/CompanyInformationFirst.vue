@@ -16,30 +16,26 @@ export default {
     collapse: function () {
       this.handle('first')
     },
-    legalFormLabel (option) {
-      setTimeout(() => {
-        if (option.length >= 0) {
-          const value = this.formData.legal_form
-          const options = this.options.legal_form
-          const label = options.find(x => x.value === value)
-          this.formData.legal_form = label
-        }
-      }, this.wait)
-      return `${option.label}`
+    legalFormLabel () {
+      const value = this.formData.legal_form
+      const options = this.options.legal_form
+      const label = options.find(x => x.value === value)
+      this.formData.legal_form = label
     },
     countryFormLabel (option) {
-      setTimeout(() => {
-        if (option.length >= 0) {
-          const value = this.formData.country
-          const options = this.options.country
-          const label = options.find(x => x.value === value)
-          this.formData.country = label
-        }
-      }, this.wait)
-      return `${option.label}`
+      const value = this.formData.country
+      const options = this.options.country
+      const label = options.find(x => x.value === value)
+      console.log(label)
+      this.formData.country = label
     }
   },
-
+  mounted () {
+    setTimeout(() => {
+      this.legalFormLabel()
+      this.countryFormLabel()
+    }, 1000)
+  },
   components: {
     CircleProgress,
     compAccordion,
@@ -67,9 +63,8 @@ export default {
             </div>
             <div class="editInfo__content-form_label">
               <label for="legal_form" class="left">Forma Prawna</label>
-              <!-- <input class="normal" type="text" id="legal_form" placeholder="Wpisz nazwe firma" v-model="formData.legal_form"> -->
               <div style="width:20rem;display:inline-flex;margin-bottom:1.5rem;">
-                <multiselect :custom-label="legalFormLabel" v-model="formData.legal_form" :options="options.legal_form" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy">
+                <multiselect :value="legalFormLabel" v-model="formData.legal_form" :options="options.legal_form" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy">
                    <template slot="singleLabel" slot-scope="props">{{props.option.label}}</template>
                   <template slot="option" slot-scope="props">
                     {{props.option.label}}
@@ -100,7 +95,7 @@ export default {
             <div class="editInfo__content-form_label">
               <label for="country" class="right">Kraj</label>
               <div style="width:24rem;display:inline-flex;margin-bottom:1.5rem;">
-                <multiselect :custom-label="countryFormLabel" v-model="formData.country" :options="options.country" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy">
+                <multiselect :value="countryFormLabel" v-model="formData.country" :options="options.country" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy">
                   <template slot="singleLabel" slot-scope="props">{{props.option.label}}</template>
                   <template slot="option" slot-scope="props">
                     {{props.option.label}}
