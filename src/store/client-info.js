@@ -5,7 +5,9 @@ const state = {
   values: {
     'country': [],
     'legal_form': [],
-    'benefits': []
+    'benefits': [],
+    'forms_of_cooperation': [],
+    'company_values': []
   }
 }
 

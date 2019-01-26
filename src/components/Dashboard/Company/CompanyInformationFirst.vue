@@ -26,11 +26,12 @@ export default {
       const value = this.formData.country
       const options = this.options.country
       const label = options.find(x => x.value === value)
-      console.log(label)
       this.formData.country = label
     }
   },
   mounted () {
+    this.legalFormLabel()
+    this.countryFormLabel()
     setTimeout(() => {
       this.legalFormLabel()
       this.countryFormLabel()

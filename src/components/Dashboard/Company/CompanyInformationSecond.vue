@@ -12,10 +12,10 @@
         <div class="editInfo__content-firma">
           <div class="editInfo__content-firma_column" style="display:flex;flex-flow:column;">
             <label for="opis">Opis firma</label>
-            <textarea name="" id="opis" cols="30" rows="10"></textarea>
+            <textarea name="" v-model="formData.description" id="opis" cols="30" rows="10"></textarea>
 
             <label for="konk">Czym firma wroznia na konkurencji</label>
-            <textarea id="konk" cols="30" rows="10"></textarea>
+            <textarea v-model="formData.uniqueness_on_market" id="konk" cols="30" rows="10"></textarea>
 
             <label for="wartosci">Wartosci firma</label>
             <div style="width:24rem;display:inline-flex;margin-bottom:1.5rem;">
@@ -42,13 +42,14 @@
             <div class="toggle-input">
               <div class="toggle-input-column">
                 <label for="urlop_b2b">Urlop B2B</label>
-                <input id="urlop_b2b" type="number" class="normal" placeholder="Ilosc dni" style="width:15rem;margin-top:1rem">
+                <input v-if="paidHoliday" v-model="formData.holidays" id="urlop_b2b" type="number" class="normal" placeholder="Ilosc dni"  style="width:15rem;margin-top:1rem">
+                <input v-if="!paidHoliday" id="urlop_b2b" v-model="formData.paid_b2b_holidays" type="number" class="normal" placeholder="Ilosc dni" style="width:15rem;margin-top:1rem">
               </div>
               <div class="toggle-input-column">
                 <label>Platny/Bezplatny</label>
                 <div class="toggle">
                   <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" @click="toggleHoliday">
                     <span class="slider round"></span>
                   </label>
                 </div>
@@ -57,13 +58,14 @@
             <div class="toggle-input">
               <div class="toggle-input-column">
                 <label for="chrobowe_b2b">Chrobowe B2B</label>
-                <input type="number" id="chrobowe_b2b" class="normal" placeholder="Ilosc dni" style="width:15rem;margin-top:1rem">
+                <input v-if="sickLeave" v-model="formData.sick_leave" type="number" id="chrobowe_b2b" class="normal" placeholder="Ilosc dni" style="width:15rem;margin-top:1rem">
+                <input v-if="!sickLeave" v-model="formData.paid_b2b_sick_leave" type="number" id="chrobowe_b2b" class="normal" placeholder="Ilosc dni" style="width:15rem;margin-top:1rem">
               </div>
               <div class="toggle-input-column">
                 <label>Platny/Bezplatny</label>
                 <div class="toggle">
                   <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" @click="toggleSickLeave">
                     <span class="slider round"></span>
                   </label>
                 </div>
@@ -71,16 +73,16 @@
               <div class="editInfo__content-firma_social">
                 <label>Linki do social media</label>
                 <div class="social-input">
-                  <img src="@/assets/img/form/cominfo/facebook.svg"><input class="normal" type="text" id="facebook" v-model="formData.facebook_url">
+                  <img src="@/assets/img/form/cominfo/facebook.svg"><input class="normal" type="text" id="facebook" v-model="formData.facebook_url" placeholder="link">
                 </div>
                 <div class="social-input">
-                  <img src="@/assets/img/form/cominfo/instagram.svg"> <input class="normal" type="text" id="instagram" v-model="formData.instagram_url">
+                  <img src="@/assets/img/form/cominfo/instagram.svg"> <input class="normal" type="text" id="instagram" v-model="formData.instagram_url" placeholder="link">
                 </div>
                 <div class="social-input">
-                  <img src="@/assets/img/form/cominfo/linkedin.svg"><input class="normal" type="text" id="linkedin" v-model="formData.linkedin_url">
+                  <img src="@/assets/img/form/cominfo/linkedin.svg"><input class="normal" type="text" id="linkedin" v-model="formData.linkedin_url" placeholder="link">
                 </div>
                 <div class="social-input">
-                  <img src="@/assets/img/form/cominfo/twitter.svg"><input class="normal" type="text" id="twitter" v-model="formData.twitter_url">
+                  <img src="@/assets/img/form/cominfo/twitter.svg"><input class="normal" type="text" id="twitter" v-model="formData.twitter_url" placeholder="link">
                 </div>
               </div>
             </div>
@@ -99,13 +101,21 @@ export default {
   props: ['active', 'formData', 'options', 'handle'],
   data () {
     return {
-      wait: 300
+      wait: 300,
+      paidHoliday: false,
+      sickLeave: false
     }
   },
   computed: {
 
   },
   methods: {
+    toggleHoliday: function () {
+      this.paidHoliday = !this.paidHoliday
+    },
+    toggleSickLeave: function () {
+      this.paidHoliday = !this.paidHoliday
+    },
     collapse: function () {
       this.handle('second')
     },
@@ -127,6 +137,8 @@ export default {
     }
   },
   mounted () {
+    this.benefitsLabel()
+    this.companyValuesLabel()
     setTimeout(() => {
       this.benefitsLabel()
       this.companyValuesLabel()
