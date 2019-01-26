@@ -113,7 +113,7 @@
         &_column_radio {
           display: flex;
           flex-flow: column;
-          max-width: 30rem;
+          max-width: 35rem;
 
           .radios {
             display: flex;
@@ -122,6 +122,19 @@
             .radio {
               width: 100%;
               max-width: 50%;
+              margin: 0;
+              padding: 0;
+
+              input[type=checkbox] {
+                margin-bottom: .7rem
+              }
+
+              label {
+                margin: 0 0 1rem 1rem;
+                padding: 0;
+                line-height: 1.4;
+              }
+
             }
           }
         }

@@ -4,7 +4,8 @@ const state = {
   client: {},
   values: {
     'country': [],
-    'legal_form': []
+    'legal_form': [],
+    'benefits': []
   }
 }
 
