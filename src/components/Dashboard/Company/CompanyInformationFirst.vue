@@ -30,12 +30,10 @@ export default {
     }
   },
   mounted () {
-    this.legalFormLabel()
-    this.countryFormLabel()
     setTimeout(() => {
       this.legalFormLabel()
       this.countryFormLabel()
-    }, 1000)
+    }, 500)
   },
   components: {
     CircleProgress,

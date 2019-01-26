@@ -137,12 +137,10 @@ export default {
     }
   },
   mounted () {
-    this.benefitsLabel()
-    this.companyValuesLabel()
     setTimeout(() => {
       this.benefitsLabel()
       this.companyValuesLabel()
-    }, 1000)
+    }, 500)
   },
   components: {
     CircleProgress,
