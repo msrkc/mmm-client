@@ -1,3 +1,63 @@
+<script>
+import CircleProgress from '@/components/UI/circleprogress.vue'
+import compAccordion from '@/components/UI/accordion.vue'
+import Multiselect from 'vue-multiselect'
+export default {
+  props: ['active', 'formData', 'options', 'handle'],
+  data () {
+    return {
+      wait: 300,
+      paidHoliday: false,
+      sickLeave: false
+    }
+  },
+  methods: {
+    toggleHoliday () {
+      this.paidHoliday = !this.paidHoliday
+    },
+    toggleSickLeave () {
+      this.sickLeave = !this.sickLeave
+    },
+    collapse () {
+      this.handle('second')
+    },
+    getSingleLabel (label) {
+      const getvalues = this.formData[label]
+      const options = this.options[label]
+      const filteredArray = options.filter(function (itm) {
+        return getvalues.indexOf(itm.value) > -1
+      })
+      this.formData[label] = filteredArray
+    },
+    makeArr (label) {
+      const arr = this.formData[label].map(function (el) {
+        return el.value
+      })
+      return arr
+    },
+    deneme () {
+      let formData = {
+        'company_values': this.makeArr('company_values'),
+        'twitter_url': this.formData.twitter_url,
+        'benefits': this.makeArr('benefits')
+      }
+      console.log(formData)
+    }
+  },
+  created () {
+    setTimeout(() => {
+      this.getSingleLabel('benefits')
+      this.getSingleLabel('company_values')
+    }, 500)
+  },
+  components: {
+    CircleProgress,
+    compAccordion,
+    Multiselect
+  }
+}
+</script>
+
 <template>
   <div>
     <compAccordion :active="active">
@@ -19,14 +79,14 @@
 
             <label for="wartosci">Wartosci firma</label>
             <div style="width:24rem;display:inline-flex;margin-bottom:1.5rem;">
-             <multiselect :value="companyValuesLabel" v-model="formData.company_values" :options="options.company_values" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Wybierz z listy" label="value" track-by="value" :preselect-first="true" open-direction="top" :show-labels="false">
+             <multiselect :value="formData.company_values" v-model="formData.company_values" :options="options.company_values" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Wybierz z listy" label="value" track-by="value" :preselect-first="true" open-direction="top" :show-labels="false">
                 <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
               </multiselect>
             </div>
             <label>Typ kultry organizecjynej</label>
             <label>Swiadaczenia pozaplacowe</label>
             <div style="width:24rem;display:inline-flex;margin-bottom:1.5rem;">
-              <multiselect :value="benefitsLabel" v-model="formData.benefits" :options="options.benefits" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Wybierz z listy" label="value" track-by="value" :preselect-first="true" open-direction="top" :show-labels="false">
+              <multiselect :value="formData.benefits" v-model="formData.benefits" :options="options.benefits" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Wybierz z listy" label="value" track-by="value" :preselect-first="true" open-direction="top" :show-labels="false">
                 <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
               </multiselect>
             </div>
@@ -87,66 +147,9 @@
               </div>
             </div>
           </div>
+          <button @click="deneme">deneme</button>
         </div>
       </div>
     </compAccordion>
   </div>
 </template>
-
-<script>
-import CircleProgress from '@/components/UI/circleprogress.vue'
-import compAccordion from '@/components/UI/accordion.vue'
-import Multiselect from 'vue-multiselect'
-export default {
-  props: ['active', 'formData', 'options', 'handle'],
-  data () {
-    return {
-      wait: 300,
-      paidHoliday: false,
-      sickLeave: false
-    }
-  },
-  computed: {
-
-  },
-  methods: {
-    toggleHoliday: function () {
-      this.paidHoliday = !this.paidHoliday
-    },
-    toggleSickLeave: function () {
-      this.paidHoliday = !this.paidHoliday
-    },
-    collapse: function () {
-      this.handle('second')
-    },
-    benefitsLabel () {
-      const getvalues = this.formData.benefits
-      const options = this.options.benefits
-      const filteredArray = options.filter(function (itm) {
-        return getvalues.indexOf(itm.value) > -1
-      })
-      this.formData.benefits = filteredArray
-    },
-    companyValuesLabel () {
-      const getvalues = this.formData.company_values
-      const options = this.options.company_values
-      const filteredArray = options.filter(function (itm) {
-        return getvalues.indexOf(itm.value) > -1
-      })
-      this.formData.company_values = filteredArray
-    }
-  },
-  mounted () {
-    setTimeout(() => {
-      this.benefitsLabel()
-      this.companyValuesLabel()
-    }, 500)
-  },
-  components: {
-    CircleProgress,
-    compAccordion,
-    Multiselect
-  }
-}
-
-</script>

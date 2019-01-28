@@ -4,35 +4,21 @@ import compAccordion from '@/components/UI/accordion.vue'
 import Multiselect from 'vue-multiselect'
 export default {
   props: ['active', 'formData', 'options', 'handle'],
-  computed: {
-
-  },
-  data () {
-    return {
-      wait: 500
-    }
-  },
   methods: {
     collapse: function () {
       this.handle('first')
     },
-    legalFormLabel () {
-      const value = this.formData.legal_form
-      const options = this.options.legal_form
-      const label = options.find(x => x.value === value)
-      this.formData.legal_form = label
-    },
-    countryFormLabel (option) {
-      const value = this.formData.country
-      const options = this.options.country
-      const label = options.find(x => x.value === value)
-      this.formData.country = label
+    getMultiLabel (label) {
+      const value = this.formData[label]
+      const options = this.options[label]
+      const filtered = options.find(x => x.value === value)
+      this.formData[label] = filtered
     }
   },
   mounted () {
     setTimeout(() => {
-      this.legalFormLabel()
-      this.countryFormLabel()
+      this.getMultiLabel('legal_form')
+      this.getMultiLabel('country')
     }, 500)
   },
   components: {
@@ -63,7 +49,7 @@ export default {
             <div class="editInfo__content-form_label">
               <label for="legal_form" class="left">Forma Prawna</label>
               <div style="width:20rem;display:inline-flex;margin-bottom:1.5rem;">
-                <multiselect :value="legalFormLabel" v-model="formData.legal_form" :options="options.legal_form" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy">
+                <multiselect :value="formData.legal_form" v-model="formData.legal_form" :options="options.legal_form" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy">
                    <template slot="singleLabel" slot-scope="props">{{props.option.label}}</template>
                   <template slot="option" slot-scope="props">
                     {{props.option.label}}
@@ -94,7 +80,7 @@ export default {
             <div class="editInfo__content-form_label">
               <label for="country" class="right">Kraj</label>
               <div style="width:24rem;display:inline-flex;margin-bottom:1.5rem;">
-                <multiselect :value="countryFormLabel" v-model="formData.country" :options="options.country" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy">
+                <multiselect :value="formData.country" v-model="formData.country" :options="options.country" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy">
                   <template slot="singleLabel" slot-scope="props">{{props.option.label}}</template>
                   <template slot="option" slot-scope="props">
                     {{props.option.label}}
@@ -104,7 +90,7 @@ export default {
             </div>
             <div class="editInfo__content-form_label">
               <label for="postal_code" class="right">Kod pocztowy</label>
-              <input class="normal" type="text" id="postal_code" placeholder="Wpisz" v-model="formData.postal_code">
+              <input class="normal" type="number" id="postal_code" placeholder="Wpisz" v-model="formData.postal_code">
             </div>
           </div>
         </div>
