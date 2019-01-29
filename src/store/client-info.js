@@ -7,7 +7,11 @@ const state = {
     'legal_form': [],
     'benefits': [],
     'forms_of_cooperation': [],
-    'company_values': []
+    'company_values': [],
+    'technology_stack': [],
+    'methodologies': [],
+    'version_control_systems': [],
+    'specialization': []
   }
 }
 
