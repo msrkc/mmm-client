@@ -5,28 +5,6 @@ import CompanyInformationThird from '@/components/Dashboard/Company/CompanyInfor
 export default {
   data () {
     return {
-      valueMulti: [{
-        label: 'Javascript',
-        value: 'js'
-      },
-      {
-        label: 'Open Source',
-        value: 'os'
-      }
-      ],
-      optionsMulti: [{
-        label: 'Vue.js',
-        value: 'vu'
-      },
-      {
-        label: 'Javascript',
-        value: 'js'
-      },
-      {
-        label: 'Open Source',
-        value: 'os'
-      }
-      ],
       acc: {
         first: true,
         second: false,
@@ -105,7 +83,6 @@ export default {
     <div style="height:5px;background:orange" :style="{width: progressBar + '%'}"></div>
     <companyInformationFirst :active="acc.first" :formData="formData" :options="options" :handle="handle" @collapseParent="collapseOnSubmit"></companyInformationFirst>
     <companyInformationSecond :active="acc.second" :formData="formData" :options="options" :handle="handle" @collapseParent="collapseOnSubmit"></companyInformationSecond>
-    <companyInformationThird :active="acc.third" :formData="formData" :options="optionsMulti" :valueMulti="valueMulti" :handle="handle"></companyInformationThird>
-    {{formData}}
+    <companyInformationThird :active="acc.third" :formData="formData" :options="options" :handle="handle"></companyInformationThird>
   </div>
 </template>

@@ -203,6 +203,28 @@
         }
       }
 
+      &-it {
+        display: flex;
+        padding: 3rem;
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        &_column {
+          display: flex;
+          flex-flow: column;
+          width: 45%;
+        }
+
+        &__row-toggle {
+          display: flex;
+          justify-content: space-between;
+
+          span.editInfo__content-dark-text {
+            margin-right: 1rem;
+          }
+        }
+      }
+
       &-form_label {
         display: flex;
         flex-direction: row wrap;

@@ -83,7 +83,7 @@ export default {
             <div class="editInfo__content-form_label">
               <label for="legal_form" class="left">Forma Prawna</label>
               <div style="width:20rem;display:inline-flex;margin-bottom:1.5rem;">
-                <multiselect :value="formData.legal_form" v-model="formData.legal_form" :options="options.legal_form" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy">
+                <multiselect v-model="formData.legal_form" :options="options.legal_form" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy">
                    <template slot="singleLabel" slot-scope="props">{{props.option.label}}</template>
                   <template slot="option" slot-scope="props">
                     {{props.option.label}}
@@ -114,7 +114,7 @@ export default {
             <div class="editInfo__content-form_label">
               <label for="country" class="right">Kraj</label>
               <div style="width:24rem;display:inline-flex;margin-bottom:1.5rem;">
-                <multiselect :value="formData.country" v-model="formData.country" :options="options.country" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy">
+                <multiselect v-model="formData.country" :options="options.country" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy">
                   <template slot="singleLabel" slot-scope="props">{{props.option.label}}</template>
                   <template slot="option" slot-scope="props">
                     {{props.option.label}}
