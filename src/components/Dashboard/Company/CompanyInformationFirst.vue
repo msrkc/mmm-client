@@ -8,18 +8,52 @@ export default {
     collapse: function () {
       this.handle('first')
     },
-    getMultiLabel (label) {
+    onSubmit () {
+      let formData = {
+        'company_name': this.formData.company_name,
+        'legal_form': this.formData.legal_form.value,
+        'address': this.formData.address,
+        'city': this.formData.city,
+        'capital_group_name': this.formData.capital_group_name,
+        'date_of_creation': this.formData.date_of_creation,
+        'country': this.formData.country.value,
+        'postal_code': this.formData.postal_code,
+        'payment_contact_name': this.formData.payment_contact_name,
+        'payment_contact_email': this.formData.payment_contact_email,
+        'payment_contact_phone_number,': this.formData.payment_contact_phone_number,
+        'cooperation_contact_name,': this.formData.cooperation_contact_name,
+        'cooperation_contact_position,': this.formData.cooperation_contact_position,
+        'cooperation_contact_email,': this.formData.cooperation_contact_email,
+        'cooperation_contact_phone_number,': this.formData.cooperation_contact_phone_number,
+        'contact_preference,': this.formData.contact_preference,
+        'hr_department,': this.formData.hr_department,
+        'interest_in_products,': this.formData.interest_in_products
+      }
+      console.log(formData)
+      setTimeout(() => {
+        this.$emit('collapseParent', 'second')
+      }, 1500)
+    },
+    getSingleLabel (label) {
       const value = this.formData[label]
       const options = this.options[label]
       const filtered = options.find(x => x.value === value)
       this.formData[label] = filtered
+    },
+    atCreatedLabels () {
+      if (this.formData.legal_form === undefined) {
+        setTimeout(() => {
+          this.getSingleLabel('legal_form')
+          this.getSingleLabel('country')
+        }, 500)
+      } else {
+        this.getSingleLabel('legal_form')
+        this.getSingleLabel('country')
+      }
     }
   },
-  mounted () {
-    setTimeout(() => {
-      this.getMultiLabel('legal_form')
-      this.getMultiLabel('country')
-    }, 500)
+  created () {
+    this.atCreatedLabels()
   },
   components: {
     CircleProgress,
@@ -144,7 +178,7 @@ export default {
 
           </div>
         </div>
-        <button @click.prevent="handle('second')" style="align-self:flex-end;justify-self:flex-end;">next step</button>
+        <button @click="onSubmit" style="align-self:flex-end;justify-self:flex-end;">next step</button>
       </div>
     </compAccordion>
 </div>

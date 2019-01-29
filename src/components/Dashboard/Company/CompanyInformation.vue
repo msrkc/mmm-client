@@ -44,6 +44,19 @@ export default {
           accordions[key] = false
         }
       })
+    },
+    collapseOnSubmit (childCollapse) {
+      this.handle(childCollapse)
+      window.smoothscroll()
+    },
+    mountedScroll () {
+      window.smoothscroll = () => {
+        let currentScroll = document.documentElement.scrollTop || document.body.scrollTop
+        if (currentScroll > 0) {
+          window.requestAnimationFrame(window.smoothscroll)
+          window.scrollTo(0, Math.floor(currentScroll - (currentScroll / 5)))
+        }
+      }
     }
   },
   computed: {
@@ -64,13 +77,16 @@ export default {
       let status = 0
       Object.keys(obj).slice(2, total).map((item) => {
         const entry = obj[item]
-        if (entry !== null && entry !== '' && entry !== undefined && entry.length > 0 && entry !== []) {
+        if (entry !== null && entry !== '' && entry !== undefined && entry.length > 0) {
           ++status
         }
         return status
       })
       return status * 100 / total
     }
+  },
+  mounted () {
+    this.mountedScroll()
   },
   destroyed () {
     this.$store.dispatch('clientInfo/getClient')
@@ -85,10 +101,10 @@ export default {
 </script>
 
 <template>
-  <div class="companyInfo">
+  <div class="companyInfo" ref="accordions">
     <div style="height:5px;background:orange" :style="{width: progressBar + '%'}"></div>
-    <companyInformationFirst :active="acc.first" :formData="formData" :options="options" :handle="handle"></companyInformationFirst>
-    <companyInformationSecond :active="acc.second" :formData="formData" :options="options" :handle="handle"></companyInformationSecond>
+    <companyInformationFirst :active="acc.first" :formData="formData" :options="options" :handle="handle" @collapseParent="collapseOnSubmit"></companyInformationFirst>
+    <companyInformationSecond :active="acc.second" :formData="formData" :options="options" :handle="handle" @collapseParent="collapseOnSubmit"></companyInformationSecond>
     <companyInformationThird :active="acc.third" :formData="formData" :options="optionsMulti" :valueMulti="valueMulti" :handle="handle"></companyInformationThird>
     {{formData}}
   </div>

@@ -6,7 +6,6 @@ export default {
   props: ['active', 'formData', 'options', 'handle'],
   data () {
     return {
-      wait: 300,
       paidHoliday: false,
       sickLeave: false
     }
@@ -21,7 +20,29 @@ export default {
     collapse () {
       this.handle('second')
     },
-    getSingleLabel (label) {
+    onSubmit () {
+      let formData = {
+        'company_values': this.makeArr('company_values'),
+        'benefits': this.makeArr('benefits'),
+        'description': this.formData.description,
+        'uniqueness_on_market': this.formData.uniqueness_on_market,
+        'forms_of_cooperation': this.formData.forms_of_cooperation,
+        'paid_b2b_holidays': this.formData.paid_b2b_holidays,
+        'holidays': this.formData.holidays,
+        'sick_leave': this.formData.sick_leave,
+        'paid_b2b_sick_leave': this.formData.paid_b2b_sick_leave,
+        'facebook_url': this.formData.facebook_url,
+        'instagram_url': this.formData.instagram_url,
+        'linkedin_url': this.formData.linkedin_url,
+        'twitter_url': this.formData.twitter_url
+      }
+      console.log(formData)
+
+      setTimeout(() => {
+        this.$emit('collapseParent', 'third')
+      }, 1500)
+    },
+    getMultiLabel (label) {
       const getvalues = this.formData[label]
       const options = this.options[label]
       const filteredArray = options.filter(function (itm) {
@@ -29,26 +50,26 @@ export default {
       })
       this.formData[label] = filteredArray
     },
+    atCreatedLabels () {
+      if (this.formData.benefits === undefined) {
+        setTimeout(() => {
+          this.getMultiLabel('benefits')
+          this.getMultiLabel('company_values')
+        }, 500)
+      } else {
+        this.getMultiLabel('benefits')
+        this.getMultiLabel('company_values')
+      }
+    },
     makeArr (label) {
       const arr = this.formData[label].map(function (el) {
         return el.value
       })
       return arr
-    },
-    deneme () {
-      let formData = {
-        'company_values': this.makeArr('company_values'),
-        'twitter_url': this.formData.twitter_url,
-        'benefits': this.makeArr('benefits')
-      }
-      console.log(formData)
     }
   },
   created () {
-    setTimeout(() => {
-      this.getSingleLabel('benefits')
-      this.getSingleLabel('company_values')
-    }, 500)
+    this.atCreatedLabels()
   },
   components: {
     CircleProgress,
@@ -147,7 +168,7 @@ export default {
               </div>
             </div>
           </div>
-          <button @click="deneme">deneme</button>
+          <button @click="onSubmit">deneme</button>
         </div>
       </div>
     </compAccordion>
