@@ -1,9 +1,7 @@
 import { HTTP } from '@/http'
-import router from '@/router'
 
 const state = {
   client: {},
-  identifier: null,
   values: {
     'country': [],
     'legal_form': [],
@@ -23,8 +21,7 @@ const getters = {
   },
   values (state) {
     return state.values
-  },
-  identifier: state => state.client.identifier
+  }
 }
 
 const mutations = {
@@ -33,11 +30,6 @@ const mutations = {
   },
   setValues (state, values) {
     state.values = values
-  },
-  setIdentifier (state, identifier) {
-    if (identifier.length > 1) {
-      state.identifier = identifier
-    }
   }
 }
 
@@ -45,17 +37,13 @@ const actions = {
   welcomePatch ({ commit }, payload) {
     HTTP.patch('/', { ...payload })
       .then(({ data }) => {
-        commit('setIdentifier', payload.identifier)
-        router.go('/')
+        console.log(data)
       })
-      .catch(error => console.log(error))
   },
   getClient ({ commit }) {
     HTTP.get('/')
       .then(({ data }) => {
-        // console.log('clientget')
         commit('setClient', data)
-        commit('setIdentifier', data.identifier)
       })
       .catch(err => { console.log(err) })
   },

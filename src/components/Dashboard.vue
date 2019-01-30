@@ -17,7 +17,7 @@ export default {
     }
   },
   created () {
-    // this.$store.dispatch('clientInfo/getClient')
+    this.$store.dispatch('clientInfo/getClient')
     this.$store.dispatch('clientInfo/getValues')
   }
 }

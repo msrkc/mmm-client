@@ -38,9 +38,10 @@
           </div>
           <input
                 type="number"
-                :placeholder="placeholder"
-                id="identifier"
-                v-model="formData.identifier" required>
+                :placeholder="formData.language === 'pl' ? 'Numer NIP' : 'Vat ID'"
+                id="company_id"
+                v-model="formData.identifier"
+              >
           <span class="login-welcome-text">Ilu pracowników zatrudnia Twoja firma?</span>
           <div class="login-radio-img">
             <input
@@ -119,7 +120,7 @@
               <span>50+</span>
               </label>
           </div>
-          <button class="btn login__box-loginForm-onSubmit" @click.prevent="welcomePatch(formData)">
+          <button class="btn login__box-loginForm-onSubmit" @click.prevent="formHandler">
               Rozpocznij
             </button>
         </div>
@@ -130,7 +131,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 export default {
   data () {
     return {
@@ -143,23 +143,18 @@ export default {
       }
     }
   },
-  computed: {
-    placeholder () {
-      if (this.formData.language === 'pl') {
-        return 'Numer NIP'
-      } else if (this.formData.language === 'en') {
-        return 'VAT ID'
-      }
-      return 'placeholder'
+  methods: {
+    formHandler () {
+      this.$store.dispatch('clientInfo/welcomePatch', this.formData)
+    },
+    falseLoading () {
+      setTimeout(() => {
+        this.isLoading = false
+      }, 300)
     }
   },
-  methods: {
-    ...mapActions('clientInfo', ['welcomePatch'])
-  },
   mounted () {
-    setTimeout(() => {
-      this.isLoading = false
-    }, 300)
+    this.falseLoading()
   }
 }
 </script>
