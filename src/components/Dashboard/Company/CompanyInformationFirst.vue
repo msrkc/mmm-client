@@ -1,13 +1,11 @@
 <script>
+import { clientMixin } from './_mixin.js'
 import CircleProgress from '@/components/UI/circleprogress.vue'
 import compAccordion from '@/components/UI/accordion.vue'
 import Multiselect from 'vue-multiselect'
 export default {
-  props: ['active', 'formData', 'options', 'handle'],
+  mixins: [clientMixin],
   methods: {
-    collapse: function () {
-      this.handle('first')
-    },
     onSubmit () {
       let formData = {
         'company_name': this.formData.company_name,
@@ -33,12 +31,6 @@ export default {
       setTimeout(() => {
         this.$emit('collapseParent', 'second')
       }, 1500)
-    },
-    getSingleLabel (label) {
-      const value = this.formData[label]
-      const options = this.options[label]
-      const filtered = options.find(x => x.value === value)
-      this.formData[label] = filtered
     },
     atCreatedLabels () {
       if (this.formData.legal_form === undefined) {
@@ -66,7 +58,7 @@ export default {
 <template>
 <div>
     <compAccordion :active="active">
-      <div class="editInfo-head" slot="titleAcc" @click="collapse">
+      <div class="editInfo-head" slot="titleAcc" @click="collapse('first')">
         <circle-progress :percentage="0" :number="1" :dotx="5" :doty="4" />
         <div class="editInfo-head--titles">
           <h2>Etap 1. – Podstawowe informacje formalne</h2>

@@ -37,19 +37,10 @@
               </label>
           </div>
           <input
-                v-if="formData.language === 'pl'"
                 type="number"
-                placeholder="Podaj NIP"
-                id="company_name"
-                v-model="formData.identifier"
-              >
-          <input
-                v-if="formData.language === 'en'"
-                type="number"
-                placeholder="Vat ID"
-                id="company_name"
-                v-model="formData.identifier"
-              >
+                :placeholder="placeholder"
+                id="identifier"
+                v-model="formData.identifier" required>
           <span class="login-welcome-text">Ilu pracowników zatrudnia Twoja firma?</span>
           <div class="login-radio-img">
             <input
@@ -128,7 +119,7 @@
               <span>50+</span>
               </label>
           </div>
-          <button class="btn login__box-loginForm-onSubmit" @click.prevent="formHandler">
+          <button class="btn login__box-loginForm-onSubmit" @click.prevent="welcomePatch(formData)">
               Rozpocznij
             </button>
         </div>
@@ -139,30 +130,36 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {
       isLoading: true,
       formData: {
         identifier: '',
-        employees_to_hire: '',
-        company_size: '',
+        employees_to_hire: '10-20',
+        company_size: '10-49',
         language: 'pl'
       }
     }
   },
-  methods: {
-    formHandler () {
-      this.$store.dispatch('clientInfo/welcomePatch', this.formData)
-    },
-    falseLoading () {
-      setTimeout(() => {
-        this.isLoading = false
-      }, 300)
+  computed: {
+    placeholder () {
+      if (this.formData.language === 'pl') {
+        return 'Numer NIP'
+      } else if (this.formData.language === 'en') {
+        return 'VAT ID'
+      }
+      return 'placeholder'
     }
   },
+  methods: {
+    ...mapActions('clientInfo', ['welcomePatch'])
+  },
   mounted () {
-    this.falseLoading()
+    setTimeout(() => {
+      this.isLoading = false
+    }, 300)
   }
 }
 </script>

@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store'
 
 import Login from '@/components/Login/Login.vue'
 import Register from '@/components/Login/Register.vue'
@@ -12,21 +14,61 @@ import CompanyInformation from '@/components/Dashboard/Company/CompanyInformatio
 
 Vue.use(Router)
 
-const guardNoUser = {
-  beforeEnter (to, from, next) {
-    const token = localStorage.getItem('token')
-    if (!token) {
-      next('/login')
-    } else {
-      next()
-    }
-  }
-}
-
 const guardUser = {
   beforeEnter (to, from, next) {
+    const checkWelcome = () => {
+      store.dispatch('clientInfo/getClient').then(() => {
+        if (!store.state.clientInfo.identifier) {
+          store.watch((state, getters) => getters['clientInfo/identifier'], () => {
+            if (store.state.clientInfo.identifier) {
+              next('/')
+            } else {
+              next()
+            }
+          })
+        }
+      })
+    }
+    const checkIdentifier = () => {
+      if (!store.state.clientInfo.client) {
+        store.dispatch('clientInfo/getClient').then(() => {
+          if (!store.state.clientInfo.identifier) {
+            store.watch((state, getters) => getters['clientInfo/identifier'], () => {
+              if (!store.state.clientInfo.identifier) {
+                next('/welcome')
+              } else {
+                next()
+              }
+            })
+          }
+        })
+      } else {
+        if (!store.state.clientInfo.identifier) {
+          next('/welcome')
+        } else {
+          next()
+        }
+      }
+    }
+
     const token = localStorage.getItem('token')
-    return token ? next('/') : next()
+    if (token) {
+      if (to.path === '/login' || to.path === '/register') {
+        next('/')
+      } else {
+        if (to.path === '/welcome') {
+          checkWelcome()
+        } else {
+          checkIdentifier()
+        }
+      }
+    } else {
+      if (to.path === '/login' || to.path === '/register') {
+        next()
+      } else {
+        next('/login')
+      }
+    }
   }
 }
 
@@ -39,12 +81,12 @@ export default new Router({
         { path: '/', component: DashboardHome, name: 'DashboardHome' },
         { path: 'info', component: CompanyInformation, name: 'CompanyInformation' }
       ],
-      ...guardNoUser },
+      ...guardUser },
     {
       path: '/welcome',
       name: 'welcome',
       component: Welcome,
-      ...guardNoUser
+      ...guardUser
     },
     {
       path: '/login',

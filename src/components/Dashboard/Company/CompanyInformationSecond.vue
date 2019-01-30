@@ -1,9 +1,10 @@
 <script>
+import { clientMixin } from './_mixin.js'
 import CircleProgress from '@/components/UI/circleprogress.vue'
 import compAccordion from '@/components/UI/accordion.vue'
 import Multiselect from 'vue-multiselect'
 export default {
-  props: ['active', 'formData', 'options', 'handle'],
+  mixins: [clientMixin],
   data () {
     return {
       paidHoliday: false,
@@ -16,9 +17,6 @@ export default {
     },
     toggleSickLeave () {
       this.sickLeave = !this.sickLeave
-    },
-    collapse () {
-      this.handle('second')
     },
     onSubmit () {
       let formData = {
@@ -42,14 +40,6 @@ export default {
         this.$emit('collapseParent', 'third')
       }, 1500)
     },
-    getMultiLabel (label) {
-      const getvalues = this.formData[label]
-      const options = this.options[label]
-      const filteredArray = options.filter(function (itm) {
-        return getvalues.indexOf(itm.value) > -1
-      })
-      this.formData[label] = filteredArray
-    },
     atCreatedLabels () {
       if (this.formData.benefits === undefined) {
         setTimeout(() => {
@@ -60,12 +50,6 @@ export default {
         this.getMultiLabel('benefits')
         this.getMultiLabel('company_values')
       }
-    },
-    makeArr (label) {
-      const arr = this.formData[label].map(function (el) {
-        return el.value
-      })
-      return arr
     }
   },
   created () {
@@ -82,7 +66,7 @@ export default {
 <template>
   <div>
     <compAccordion :active="active">
-      <div class="editInfo-head" slot="titleAcc" @click="collapse">
+      <div class="editInfo-head" slot="titleAcc" @click="collapse('second')">
         <circle-progress :percentage="50" :number="2" :dotx="2" :doty="10" />
         <div class="editInfo-head--titles">
           <h2>Etap 2. – Szczegółowe informacje o twojej organizacji</h2>

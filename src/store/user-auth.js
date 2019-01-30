@@ -63,7 +63,7 @@ const actions = {
         commit('process', 0)
         localStorage.setItem('token', data.token)
         HTTP.defaults.headers.common['Authorization'] = 'Token ' + data.token
-        router.push('/')
+        router.go('/welcome')
       })
       .catch(error => {
         commit('process', 0)

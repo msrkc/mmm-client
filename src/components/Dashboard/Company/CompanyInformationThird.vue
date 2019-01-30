@@ -1,7 +1,42 @@
+<script>
+import { clientMixin } from './_mixin.js'
+import CircleProgress from '@/components/UI/circleprogress.vue'
+import compAccordion from '@/components/UI/accordion.vue'
+import Multiselect from 'vue-multiselect'
+export default {
+  mixins: [clientMixin],
+  methods: {
+    atCreatedLabels () {
+      if (this.formData.benefits === undefined) {
+        setTimeout(() => {
+          this.getMultiLabel('technology_stack')
+          this.getMultiLabel('methodologies')
+          this.getMultiLabel('version_control_systems')
+          this.getMultiLabel('specialization')
+        }, 500)
+      } else {
+        this.getMultiLabel('technology_stack')
+        this.getMultiLabel('methodologies')
+        this.getMultiLabel('version_control_systems')
+        this.getMultiLabel('specialization')
+      }
+    }
+  },
+  created () {
+    this.atCreatedLabels()
+  },
+  components: {
+    CircleProgress,
+    compAccordion,
+    Multiselect
+  }
+}
+</script>
+
 <template>
 <div>
   <compAccordion :active="active">
-    <div class="editInfo-head" slot="titleAcc" @click="collapse">
+    <div class="editInfo-head" slot="titleAcc" @click="collapse('third')">
       <circle-progress :percentage="100" :number="3" :dotx="5" :doty="4" />
       <div class="editInfo-head--titles">
         <h2>Etap 3. – Szczegółowe informacje – IT</h2>
@@ -80,54 +115,3 @@
   </compAccordion>
 </div>
 </template>
-
-<script>
-import CircleProgress from '@/components/UI/circleprogress.vue'
-import compAccordion from '@/components/UI/accordion.vue'
-import Multiselect from 'vue-multiselect'
-export default {
-  props: ['active', 'formData', 'options', 'handle'],
-  methods: {
-    collapse: function () {
-      this.handle('third')
-    },
-    getMultiLabel (label) {
-      const getvalues = this.formData[label]
-      const options = this.options[label]
-      const filteredArray = options.filter(function (itm) {
-        return getvalues.indexOf(itm.value) > -1
-      })
-      this.formData[label] = filteredArray
-    },
-    atCreatedLabels () {
-      if (this.formData.benefits === undefined) {
-        setTimeout(() => {
-          this.getMultiLabel('technology_stack')
-          this.getMultiLabel('methodologies')
-          this.getMultiLabel('version_control_systems')
-          this.getMultiLabel('specialization')
-        }, 500)
-      } else {
-        this.getMultiLabel('technology_stack')
-        this.getMultiLabel('methodologies')
-        this.getMultiLabel('version_control_systems')
-        this.getMultiLabel('specialization')
-      }
-    },
-    makeArr (label) {
-      const arr = this.formData[label].map(function (el) {
-        return el.value
-      })
-      return arr
-    }
-  },
-  created () {
-    this.atCreatedLabels()
-  },
-  components: {
-    CircleProgress,
-    compAccordion,
-    Multiselect
-  }
-}
-</script>

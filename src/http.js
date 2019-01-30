@@ -1,10 +1,11 @@
 import axios from 'axios'
 import store from './store'
+
 axios.defaults.headers.common['Content-Type'] = 'application/json'
 
 export const HTTP = axios.create({
-  baseURL: process.env.VUE_APP_API,
-  timeout: 5000
+  baseURL: process.env.VUE_APP_API
+  // timeout: 10000
 })
 
 const token = localStorage.getItem('token')
@@ -18,6 +19,8 @@ HTTP.interceptors.response.use(
     const { status } = error.response
     if (status === 401) {
       store.dispatch('userAuth/logout')
+    } else {
+      console.log(error)
     }
     return Promise.reject(error)
   }
