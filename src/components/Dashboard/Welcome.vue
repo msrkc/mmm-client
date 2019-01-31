@@ -143,6 +143,11 @@ export default {
       }
     }
   },
+  computed: {
+    client () {
+      return this.$store.getters['clientInfo/client']
+    }
+  },
   methods: {
     formHandler () {
       this.$store.dispatch('clientInfo/welcomePatch', this.formData)
@@ -153,8 +158,18 @@ export default {
       }, 300)
     }
   },
+  watch: {
+    client (newCount, oldCount) {
+      if (newCount.identifier) {
+        this.$router.push({ name: 'DashboardHome' })
+      }
+    }
+  },
   mounted () {
     this.falseLoading()
+    if (Object.entries(this.client).length === 0 && this.client.constructor === Object) {
+      this.$store.dispatch('clientInfo/getClient')
+    }
   }
 }
 </script>

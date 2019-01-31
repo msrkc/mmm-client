@@ -14,11 +14,20 @@ export default {
   computed: {
     isAuth () {
       return this.$store.getters['userAuth/isAuth']
+    },
+    client () {
+      return this.$store.getters['clientInfo/client']
+    }
+  },
+  watch: {
+    client (newCount, oldCount) {
+      if (!newCount.identifier) {
+        this.$router.push({ name: 'welcome' })
+      }
     }
   },
   created () {
-    this.$store.dispatch('clientInfo/getClient')
-    this.$store.dispatch('clientInfo/getValues')
+    Promise.all([this.$store.dispatch('clientInfo/getClient'), this.$store.dispatch('clientInfo/getValues')])
   }
 }
 </script>

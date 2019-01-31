@@ -2,7 +2,7 @@ import { HTTP } from '@/http'
 import router from '@/router'
 
 const state = {
-  token: localStorage.getItem('user-token') || null,
+  token: localStorage.getItem('token') || null,
   errors: '',
   process: 0
 }
@@ -80,15 +80,6 @@ const actions = {
   },
   cleanError ({ commit }) {
     commit('showError', '')
-  },
-  tryAutoLogin ({ commit, dispatch }) {
-    const token = localStorage.getItem('token')
-    if (!token) {
-      return
-    }
-    commit('authUser', {
-      token: token
-    })
   }
 }
 

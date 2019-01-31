@@ -1,5 +1,5 @@
 import { HTTP } from '@/http'
-
+import router from '@/router'
 const state = {
   client: {},
   values: {
@@ -37,8 +37,9 @@ const actions = {
   welcomePatch ({ commit }, payload) {
     HTTP.patch('/', { ...payload })
       .then(({ data }) => {
-        console.log(data)
+        router.push('/')
       })
+      .catch(error => console.log(error))
   },
   getClient ({ commit }) {
     HTTP.get('/')
