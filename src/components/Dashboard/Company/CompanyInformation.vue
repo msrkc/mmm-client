@@ -58,7 +58,7 @@ export default {
           return entry
         } else if (entry === null) {
           return entry
-        } else if (entry.toString().length > 0) {
+        } else if (typeof entry !== 'undefined' && entry.toString().length > 0) {
           status++
         }
       })
