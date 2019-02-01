@@ -97,10 +97,10 @@ export default {
             </div>
           </div>
           <div class="editInfo__content-firma_column" style="display:flex;flex-flow:column;">
-            <label for="">Oferowane formy wspolpracy</label>
+            <label>Oferowane formy wspolpracy</label>
             <div class="radios">
               <div class="radio" v-for="(coorp, index) in options.forms_of_cooperation" :key="index">
-                <input :id="coorp.value" type="checkbox" v-model="formData.forms_of_cooperation" />
+                <input :id="coorp.value" type="checkbox" :value="coorp.value" v-model="formData.forms_of_cooperation" />
                 <label :for="coorp.value">{{coorp.label}}</label>
               </div>
             </div>

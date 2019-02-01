@@ -51,9 +51,9 @@ export default {
     },
     progressBar () {
       const obj = this.$store.state.clientInfo.client
-      const total = Object.keys(obj).length - 2
+      const total = Object.keys(obj).length - 7
       let status = 0
-      Object.keys(obj).slice(2, total).map((item) => {
+      Object.keys(obj).map((item) => {
         const entry = obj[item]
         if (entry !== null && entry !== '' && entry !== undefined && entry.length > 0) {
           ++status
@@ -81,6 +81,7 @@ export default {
 <template>
   <div class="companyInfo" ref="accordions">
     <div style="height:5px;background:orange" :style="{width: progressBar + '%'}"></div>
+    {{progressBar}}
     <companyInformationFirst :active="acc.first" :formData="formData" :options="options" :handle="handle" @collapseParent="collapseOnSubmit"></companyInformationFirst>
     <companyInformationSecond :active="acc.second" :formData="formData" :options="options" :handle="handle" @collapseParent="collapseOnSubmit"></companyInformationSecond>
     <companyInformationThird :active="acc.third" :formData="formData" :options="options" :handle="handle"></companyInformationThird>
