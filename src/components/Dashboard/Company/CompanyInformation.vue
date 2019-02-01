@@ -62,7 +62,7 @@ export default {
           status++
         }
       })
-      return (status - 2) * 100 / 43
+      return (status - 5) * 100 / 40
     }
   },
   mounted () {
