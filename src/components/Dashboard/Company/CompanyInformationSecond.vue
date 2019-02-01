@@ -84,14 +84,14 @@ export default {
 
             <label for="wartosci">Wartosci firma</label>
             <div style="width:24rem;display:inline-flex;margin-bottom:1.5rem;">
-             <multiselect :value="formData.company_values" v-model="formData.company_values" :options="options.company_values" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Wybierz z listy" label="label" track-by="value" :preselect-first="true" open-direction="top" :show-labels="false">
+             <multiselect :value="formData.company_values" v-model="formData.company_values" :options="options.company_values" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Wybierz z listy" label="label" track-by="value" :preselect-first="false" open-direction="top" :show-labels="false">
                 <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
               </multiselect>
             </div>
             <label>Typ kultry organizecjynej</label>
             <label>Swiadaczenia pozaplacowe</label>
             <div style="width:24rem;display:inline-flex;margin-bottom:1.5rem;">
-              <multiselect v-model="formData.benefits" :options="options.benefits" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Wybierz z listy" label="label" track-by="value" :preselect-first="true" open-direction="top" :show-labels="false">
+              <multiselect v-model="formData.benefits" :options="options.benefits" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Wybierz z listy" label="label" track-by="value" :preselect-first="false" open-direction="top" :show-labels="false">
                 <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
               </multiselect>
             </div>
