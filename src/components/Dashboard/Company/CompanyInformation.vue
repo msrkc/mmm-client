@@ -50,22 +50,23 @@ export default {
       return this.$store.getters['clientInfo/values']
     },
     progressBar () {
-      const obj = this.$store.state.clientInfo.client
-      const total = Object.keys(obj).length - 7
+      const obj = this.formData
       let status = 0
       Object.keys(obj).map((item) => {
         const entry = obj[item]
-        if (entry !== null && entry !== '' && entry !== undefined && entry.length > 0 && entry !== []) {
-          ++status
+        if (typeof entry === 'string' && entry === '') {
+          return entry
+        } else if (entry === null) {
+          return entry
+        } else if (entry.toString().length > 0) {
+          status++
         }
-        return status
       })
-      return status * 100 / total
+      return (status - 2) * 100 / 43
     }
   },
   mounted () {
     this.mountedScroll()
-    console.log(this.progressBar())
   },
   destroyed () {
     this.$store.dispatch('clientInfo/getClient')
