@@ -55,7 +55,7 @@ export default {
       let status = 0
       Object.keys(obj).map((item) => {
         const entry = obj[item]
-        if (entry !== null && entry !== '' && entry !== undefined && entry.length > 0) {
+        if (entry !== null && entry !== '' && entry !== undefined && entry.length > 0 && entry !== []) {
           ++status
         }
         return status
@@ -65,6 +65,7 @@ export default {
   },
   mounted () {
     this.mountedScroll()
+    console.log(this.progressBar())
   },
   destroyed () {
     this.$store.dispatch('clientInfo/getClient')
@@ -81,7 +82,7 @@ export default {
 <template>
   <div class="companyInfo" ref="accordions">
     <div style="height:5px;background:orange" :style="{width: progressBar + '%'}"></div>
-    {{progressBar}}
+
     <companyInformationFirst :active="acc.first" :formData="formData" :options="options" :handle="handle" @collapseParent="collapseOnSubmit"></companyInformationFirst>
     <companyInformationSecond :active="acc.second" :formData="formData" :options="options" :handle="handle" @collapseParent="collapseOnSubmit"></companyInformationSecond>
     <companyInformationThird :active="acc.third" :formData="formData" :options="options" :handle="handle"></companyInformationThird>
