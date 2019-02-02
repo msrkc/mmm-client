@@ -5,19 +5,7 @@ import compAccordion from '@/components/UI/accordion.vue'
 import Multiselect from 'vue-multiselect'
 export default {
   mixins: [clientMixin],
-  data () {
-    return {
-      paidHoliday: false,
-      sickLeave: false
-    }
-  },
   methods: {
-    toggleHoliday () {
-      this.paidHoliday = !this.paidHoliday
-    },
-    toggleSickLeave () {
-      this.sickLeave = !this.sickLeave
-    },
     onSubmit () {
       let formData = {
         company_values: this.makeArr('company_values'),
@@ -154,18 +142,8 @@ export default {
               <div class="toggle-input-column">
                 <label for="urlop_b2b">Urlop B2B</label>
                 <input
-                  v-if="paidHoliday"
                   v-model="formData.holidays"
                   id="urlop_b2b"
-                  type="number"
-                  class="normal"
-                  placeholder="Ilosc dni"
-                  style="width:15rem;margin-top:1rem"
-                >
-                <input
-                  v-if="!paidHoliday"
-                  id="urlop_b2b"
-                  v-model="formData.paid_b2b_holidays"
                   type="number"
                   class="normal"
                   placeholder="Ilosc dni"
@@ -176,7 +154,7 @@ export default {
                 <label>Platny/Bezplatny</label>
                 <div class="toggle">
                   <label class="switch">
-                    <input type="checkbox" @click="toggleHoliday">
+                    <input type="checkbox" v-model="formData.paid_b2b_holidays">
                     <span class="slider round"></span>
                   </label>
                 </div>
@@ -186,17 +164,7 @@ export default {
               <div class="toggle-input-column">
                 <label for="chrobowe_b2b">Chrobowe B2B</label>
                 <input
-                  v-if="sickLeave"
                   v-model="formData.sick_leave"
-                  type="number"
-                  id="chrobowe_b2b"
-                  class="normal"
-                  placeholder="Ilosc dni"
-                  style="width:15rem;margin-top:1rem"
-                >
-                <input
-                  v-if="!sickLeave"
-                  v-model="formData.paid_b2b_sick_leave"
                   type="number"
                   id="chrobowe_b2b"
                   class="normal"
@@ -208,7 +176,7 @@ export default {
                 <label>Platny/Bezplatny</label>
                 <div class="toggle">
                   <label class="switch">
-                    <input type="checkbox" @click="toggleSickLeave">
+                    <input type="checkbox" v-model="formData.paid_b2b_sick_leave">
                     <span class="slider round"></span>
                   </label>
                 </div>
