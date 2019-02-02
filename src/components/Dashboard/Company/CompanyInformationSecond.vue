@@ -34,11 +34,20 @@ export default {
         linkedin_url: this.formData.linkedin_url,
         twitter_url: this.formData.twitter_url
       }
+<<<<<<< HEAD
       this.$store.dispatch('clientInfo/infoPatch', formData).then(() => {
         setTimeout(() => {
           this.$emit('collapseParent', 'third')
         }, 500)
       })
+=======
+      this.$store.dispatch('clientInfo/infoPatch', formData)
+        .then(() => {
+          setTimeout(() => {
+            this.$emit('collapseParent', 'third')
+          }, 500)
+        })
+>>>>>>> 369fb041de603e16db3fa2a49d2c6d30828ae7d8
     },
     atCreatedLabels () {
       if (this.formData.benefits === undefined) {
@@ -259,7 +268,11 @@ export default {
             </div>
           </div>
         </div>
+<<<<<<< HEAD
         <button @click="onSubmit" class="editInfo-btn">Zapisz</button>
+=======
+        <button  @click="onSubmit" class="editInfo-btn">Zapisz</button>
+>>>>>>> 369fb041de603e16db3fa2a49d2c6d30828ae7d8
       </div>
     </compAccordion>
   </div>
