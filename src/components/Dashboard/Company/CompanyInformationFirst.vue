@@ -50,10 +50,25 @@ export default {
   },
   computed: {
     errorCheck () {
+      // eslint-disable-next-line no-useless-escape
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       let errors = 0
       if (!this.formData.legal_form || !this.formData.legal_form.value) {
         ++errors
-      } else if (!this.formData.country || !this.formData.country.value) {
+      }
+      if (
+        !this.formData.payment_contact_email ||
+        !re.test(this.formData.payment_contact_email)
+      ) {
+        ++errors
+      }
+      if (
+        !this.formData.cooperation_contact_email ||
+        !re.test(this.formData.cooperation_contact_email)
+      ) {
+        ++errors
+      }
+      if (!this.formData.country || !this.formData.country.value) {
         ++errors
       }
       return errors > 0
@@ -203,7 +218,7 @@ export default {
             >
             <input
               class="normal"
-              type="text"
+              type="number"
               id="payment_contact_phone_number"
               placeholder="Nr telefonu"
               v-model="formData.payment_contact_phone_number"
@@ -236,7 +251,7 @@ export default {
             >
             <input
               class="normal"
-              type="text"
+              type="number"
               id="cooperation_contact_phone_number"
               placeholder="Nr telefonu"
               v-model="formData.cooperation_contact_phone_number"
