@@ -30,9 +30,37 @@
       }
     }
 
+    &-btn {
+      font-size: 1.2rem;
+      color: #fff;
+      background-color: $lightgrey-text;
+      border-radius: 30px;
+      padding: 1rem 3rem;
+      transition: all .5s;
+      border: none;
+      align-self: flex-end;
+      justify-self: flex-end;
+      margin-right: 3rem;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $darkgrey;
+      }
+
+      &__disabled {
+        background: $lightgrey-text;
+        cursor: not-allowed;
+
+        &:hover {
+          background: $lightgrey-text;
+        }
+      }
+    }
+
     &__content {
       display: flex;
       flex-direction: column;
+      padding-bottom: 3rem;
 
       &-basic_info {
         display: flex;
@@ -104,6 +132,7 @@
           display: flex;
           flex-flow: row;
           align-items: center;
+          max-width: 35rem;
 
           span.editInfo__content-dark-text {
             margin: 0 5rem 0 0;

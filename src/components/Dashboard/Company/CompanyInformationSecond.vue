@@ -34,11 +34,12 @@ export default {
         'linkedin_url': this.formData.linkedin_url,
         'twitter_url': this.formData.twitter_url
       }
-      console.log(formData)
-
-      setTimeout(() => {
-        this.$emit('collapseParent', 'third')
-      }, 1500)
+      this.$store.dispatch('clientInfo/infoPatch', formData)
+        .then(() => {
+          setTimeout(() => {
+            this.$emit('collapseParent', 'third')
+          }, 500)
+        })
     },
     atCreatedLabels () {
       if (this.formData.benefits === undefined) {
@@ -152,8 +153,8 @@ export default {
               </div>
             </div>
           </div>
-          <button @click="onSubmit">deneme</button>
         </div>
+        <button  @click="onSubmit" class="editInfo-btn">Zapisz</button>
       </div>
     </compAccordion>
   </div>

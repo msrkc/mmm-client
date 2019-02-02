@@ -27,10 +27,12 @@ export default {
         'hr_department,': this.formData.hr_department,
         'interest_in_products,': this.formData.interest_in_products
       }
-      console.log(formData)
-      setTimeout(() => {
-        this.$emit('collapseParent', 'second')
-      }, 1500)
+      this.$store.dispatch('clientInfo/infoPatch', formData)
+        .then(() => {
+          setTimeout(() => {
+            this.$emit('collapseParent', 'second')
+          }, 500)
+        })
     },
     atCreatedLabels () {
       if (this.formData.legal_form === undefined) {
@@ -42,6 +44,17 @@ export default {
         this.getSingleLabel('legal_form')
         this.getSingleLabel('country')
       }
+    }
+  },
+  computed: {
+    errorCheck () {
+      let errors = 0
+      if (!this.formData.legal_form || !this.formData.legal_form.value) {
+        ++errors
+      } else if (!this.formData.country || !this.formData.country.value) {
+        ++errors
+      }
+      return errors > 0
     }
   },
   created () {
@@ -75,7 +88,7 @@ export default {
             <div class="editInfo__content-form_label">
               <label for="legal_form" class="left">Forma Prawna</label>
               <div style="width:20rem;display:inline-flex;margin-bottom:1.5rem;">
-                <multiselect v-model="formData.legal_form" :options="options.legal_form" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy">
+                <multiselect v-model="formData.legal_form" :options="options.legal_form" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy" ref="legalForm" label="label" track-by="label">
                    <template slot="singleLabel" slot-scope="props">{{props.option.label}}</template>
                   <template slot="option" slot-scope="props">
                     {{props.option.label}}
@@ -106,7 +119,7 @@ export default {
             <div class="editInfo__content-form_label">
               <label for="country" class="right">Kraj</label>
               <div style="width:24rem;display:inline-flex;margin-bottom:1.5rem;">
-                <multiselect v-model="formData.country" :options="options.country" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy">
+                <multiselect v-model="formData.country" :options="options.country" open-direction="bottom" :show-labels="false" placeholder="Wybierz z listy" label="label" track-by="label">
                   <template slot="singleLabel" slot-scope="props">{{props.option.label}}</template>
                   <template slot="option" slot-scope="props">
                     {{props.option.label}}
@@ -167,10 +180,9 @@ export default {
                 <label :for="interest.value">{{interest.value}}</label>
               </div>
             </div>
-
           </div>
         </div>
-        <button @click="onSubmit" style="align-self:flex-end;justify-self:flex-end;">next step</button>
+        <button :disabled="errorCheck" @click="onSubmit" class="editInfo-btn" :class="{ 'editInfo-btn__disabled': errorCheck }">Zapisz</button>
       </div>
     </compAccordion>
 </div>
