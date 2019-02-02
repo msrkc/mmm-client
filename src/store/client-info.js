@@ -34,6 +34,13 @@ const mutations = {
 }
 
 const actions = {
+  infoPatch ({ commit }, payload) {
+    HTTP.patch('/', { ...payload })
+      .then(({ data }) => {
+        console.log(data)
+      })
+      .catch(error => console.log(error))
+  },
   welcomePatch ({ commit }, payload) {
     HTTP.patch('/', { ...payload })
       .then(({ data }) => {

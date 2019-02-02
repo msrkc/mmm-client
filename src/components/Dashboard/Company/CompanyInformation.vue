@@ -18,7 +18,8 @@ export default {
       Object.keys(accordions).forEach(function (key) {
         if (key === item) {
           accordions[key] = !accordions[key]
-        } if (key !== item) {
+        }
+        if (key !== item) {
           accordions[key] = false
         }
       })
@@ -29,10 +30,11 @@ export default {
     },
     mountedScroll () {
       window.smoothscroll = () => {
-        let currentScroll = document.documentElement.scrollTop || document.body.scrollTop
+        let currentScroll =
+          document.documentElement.scrollTop || document.body.scrollTop
         if (currentScroll > 0) {
           window.requestAnimationFrame(window.smoothscroll)
-          window.scrollTo(0, Math.floor(currentScroll - (currentScroll / 5)))
+          window.scrollTo(0, Math.floor(currentScroll - currentScroll / 5))
         }
       }
     }
@@ -52,17 +54,20 @@ export default {
     progressBar () {
       const obj = this.formData
       let status = 0
-      Object.keys(obj).map((item) => {
+      Object.keys(obj).map(item => {
         const entry = obj[item]
         if (typeof entry === 'string' && entry === '') {
           return entry
         } else if (entry === null) {
           return entry
-        } else if (typeof entry !== 'undefined' && entry.toString().length > 0) {
+        } else if (
+          typeof entry !== 'undefined' &&
+          entry.toString().length > 0
+        ) {
           status++
         }
       })
-      return (status - 5) * 100 / 40
+      return ((status - 5) * 100) / 40
     }
   },
   mounted () {
@@ -77,15 +82,31 @@ export default {
     CompanyInformationThird
   }
 }
-
 </script>
 
 <template>
   <div class="companyInfo" ref="accordions">
     <div style="height:5px;background:orange" :style="{width: progressBar + '%'}"></div>
 
-    <companyInformationFirst :active="acc.first" :formData="formData" :options="options" :handle="handle" @collapseParent="collapseOnSubmit"></companyInformationFirst>
-    <companyInformationSecond :active="acc.second" :formData="formData" :options="options" :handle="handle" @collapseParent="collapseOnSubmit"></companyInformationSecond>
-    <companyInformationThird :active="acc.third" :formData="formData" :options="options" :handle="handle"></companyInformationThird>
+    <companyInformationFirst
+      :active="acc.first"
+      :formData="formData"
+      :options="options"
+      :handle="handle"
+      @collapseParent="collapseOnSubmit"
+    ></companyInformationFirst>
+    <companyInformationSecond
+      :active="acc.second"
+      :formData="formData"
+      :options="options"
+      :handle="handle"
+      @collapseParent="collapseOnSubmit"
+    ></companyInformationSecond>
+    <companyInformationThird
+      :active="acc.third"
+      :formData="formData"
+      :options="options"
+      :handle="handle"
+    ></companyInformationThird>
   </div>
 </template>
