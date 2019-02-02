@@ -33,13 +33,19 @@ const guardUser = {
 export default new Router({
   mode: 'history',
   routes: [
-    { path: '/',
+    {
+      path: '/',
       component: Dashboard,
       children: [
         { path: '/', component: DashboardHome, name: 'DashboardHome' },
-        { path: 'info', component: CompanyInformation, name: 'CompanyInformation' }
+        {
+          path: 'info',
+          component: CompanyInformation,
+          name: 'CompanyInformation'
+        }
       ],
-      ...guardNoUser },
+      ...guardNoUser
+    },
     {
       path: '/welcome',
       name: 'welcome',

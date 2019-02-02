@@ -3,15 +3,15 @@ import router from '@/router'
 const state = {
   client: {},
   values: {
-    'country': [],
-    'legal_form': [],
-    'benefits': [],
-    'forms_of_cooperation': [],
-    'company_values': [],
-    'technology_stack': [],
-    'methodologies': [],
-    'version_control_systems': [],
-    'specialization': []
+    country: [],
+    legal_form: [],
+    benefits: [],
+    forms_of_cooperation: [],
+    company_values: [],
+    technology_stack: [],
+    methodologies: [],
+    version_control_systems: [],
+    specialization: []
   }
 }
 
@@ -53,14 +53,18 @@ const actions = {
       .then(({ data }) => {
         commit('setClient', data)
       })
-      .catch(err => { console.log(err) })
+      .catch(err => {
+        console.log(err)
+      })
   },
   getValues ({ commit }) {
     HTTP.get('/values/')
       .then(({ data }) => {
         commit('setValues', data)
       })
-      .catch(err => { console.log(err) })
+      .catch(err => {
+        console.log(err)
+      })
   }
 }
 
