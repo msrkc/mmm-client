@@ -8,16 +8,16 @@
 export default {
   computed: {
     isAuth () {
-      return this.$store.getters['userAuth/isAuth']
+      return this.$store.getters['userAuth/isAuth'];
     },
     client () {
-      return this.$store.getters['clientInfo/client']
+      return this.$store.getters['clientInfo/client'];
     }
   },
   watch: {
     client (newCount, oldCount) {
       if (!newCount.identifier) {
-        this.$router.push({ name: 'welcome' })
+        this.$router.push({ name: 'welcome' });
       }
     }
   },
@@ -25,9 +25,9 @@ export default {
     Promise.all([
       this.$store.dispatch('clientInfo/getClient'),
       this.$store.dispatch('clientInfo/getValues')
-    ])
+    ]);
   }
-}
+};
 </script>
 
 <style>

@@ -1,7 +1,7 @@
 <script>
-import CompanyInformationFirst from '@/components/Dashboard/Company/CompanyInformationFirst.vue'
-import CompanyInformationSecond from '@/components/Dashboard/Company/CompanyInformationSecond.vue'
-import CompanyInformationThird from '@/components/Dashboard/Company/CompanyInformationThird.vue'
+import CompanyInformationFirst from '@/components/Dashboard/Company/CompanyInformationFirst.vue';
+import CompanyInformationSecond from '@/components/Dashboard/Company/CompanyInformationSecond.vue';
+import CompanyInformationThird from '@/components/Dashboard/Company/CompanyInformationThird.vue';
 export default {
   data () {
     return {
@@ -10,78 +10,78 @@ export default {
         second: false,
         third: false
       }
-    }
+    };
   },
   methods: {
     handle (item) {
-      let accordions = this.acc
+      let accordions = this.acc;
       Object.keys(accordions).forEach(function (key) {
         if (key === item) {
-          accordions[key] = !accordions[key]
+          accordions[key] = !accordions[key];
         }
         if (key !== item) {
-          accordions[key] = false
+          accordions[key] = false;
         }
-      })
+      });
     },
     collapseOnSubmit (childCollapse) {
-      this.handle(childCollapse)
-      window.smoothscroll()
+      this.handle(childCollapse);
+      window.smoothscroll();
     },
     mountedScroll () {
       window.smoothscroll = () => {
         let currentScroll =
-          document.documentElement.scrollTop || document.body.scrollTop
+          document.documentElement.scrollTop || document.body.scrollTop;
         if (currentScroll > 0) {
-          window.requestAnimationFrame(window.smoothscroll)
-          window.scrollTo(0, Math.floor(currentScroll - currentScroll / 5))
+          window.requestAnimationFrame(window.smoothscroll);
+          window.scrollTo(0, Math.floor(currentScroll - currentScroll / 5));
         }
-      }
+      };
     }
   },
   computed: {
     formData: {
       get () {
-        return this.$store.state.clientInfo.client
+        return this.$store.state.clientInfo.client;
       },
       set (value) {
-        this.$store.commit('clientInfo/setClient', value)
+        this.$store.commit('clientInfo/SET_CLIENT', value);
       }
     },
     options () {
-      return this.$store.getters['clientInfo/values']
+      return this.$store.getters['clientInfo/values'];
     },
     progressBar () {
-      const obj = this.formData
-      let status = 0
+      const obj = this.formData;
+      let status = 0;
       Object.keys(obj).map(item => {
-        const entry = obj[item]
+        const entry = obj[item];
         if (typeof entry === 'string' && entry === '') {
-          return entry
+          return entry;
         } else if (entry === null) {
-          return entry
+          return entry;
         } else if (
           typeof entry !== 'undefined' &&
           entry.toString().length > 0
         ) {
-          status++
+          status++;
         }
-      })
-      return ((status - 5) * 100) / 40
+      });
+      return ((status - 5) * 100) / 40;
     }
   },
   mounted () {
-    this.mountedScroll()
+    this.mountedScroll();
   },
   destroyed () {
-    this.$store.dispatch('clientInfo/getClient')
+    this.$store.dispatch('clientInfo/getClient');
   },
   components: {
     CompanyInformationFirst,
     CompanyInformationSecond,
     CompanyInformationThird
   }
-}
+};
 </script>
 
 <template>

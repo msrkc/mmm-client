@@ -1,5 +1,5 @@
-import { HTTP } from '@/http'
-import router from '@/router'
+import { HTTP } from '@/http';
+import router from '@/router';
 const state = {
   client: {},
   values: {
@@ -13,60 +13,67 @@ const state = {
     version_control_systems: [],
     specialization: []
   }
-}
+};
 
 const getters = {
-  client (state) {
-    return state.client
-  },
-  values (state) {
-    return state.values
-  }
-}
+  // client (state) {
+  //   return state.client;
+  // },
+  client: state => state.client,
+  values: state => state.values
+};
 
 const mutations = {
-  setClient (state, clientInfo) {
-    state.client = clientInfo
+  SET_CLIENT (state, clientInfo) {
+    state.client = clientInfo;
   },
-  setValues (state, values) {
-    state.values = values
+  SET_VALUES (state, values) {
+    state.values = values;
   }
-}
+};
 
 const actions = {
   infoPatch ({ commit }, payload) {
     HTTP.patch('/', { ...payload })
       .then(({ data }) => {
-        console.log(data)
+        console.log(data);
       })
-      .catch(error => console.log(error))
+      .catch(error => console.log(error));
+  },
+  async userPatch ({ commit }, payload) {
+    try {
+      const { data } = await HTTP.patch('/', { ...payload });
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   },
   welcomePatch ({ commit }, payload) {
     HTTP.patch('/', { ...payload })
       .then(({ data }) => {
-        router.push('/')
+        router.push('/');
       })
-      .catch(error => console.log(error))
+      .catch(error => console.log(error));
   },
-  getClient ({ commit }) {
-    HTTP.get('/')
-      .then(({ data }) => {
-        commit('setClient', data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+
+  async getClient ({ commit }) {
+    try {
+      const { data } = await HTTP.get('/');
+      commit('SET_CLIENT', data);
+    } catch (error) {
+      console.log(error);
+    }
   },
-  getValues ({ commit }) {
-    HTTP.get('/values/')
-      .then(({ data }) => {
-        commit('setValues', data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+
+  async getValues ({ commit }) {
+    try {
+      const { data } = await HTTP.get('/values/');
+      commit('SET_VALUES', data);
+    } catch (error) {
+      console.log(error);
+    }
   }
-}
+};
 
 export default {
   namespaced: true,
@@ -74,4 +81,4 @@ export default {
   mutations,
   actions,
   getters
-}
+};

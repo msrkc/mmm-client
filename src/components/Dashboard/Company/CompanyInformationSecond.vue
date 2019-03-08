@@ -1,8 +1,8 @@
 <script>
-import { clientMixin } from './_mixin.js'
-import CircleProgress from '@/components/UI/circleprogress.vue'
-import compAccordion from '@/components/UI/accordion.vue'
-import Multiselect from 'vue-multiselect'
+import { clientMixin } from './_mixin.js';
+import CircleProgress from '@/components/UI/circleprogress.vue';
+import compAccordion from '@/components/UI/accordion.vue';
+import Multiselect from 'vue-multiselect';
 export default {
   mixins: [clientMixin],
   methods: {
@@ -21,34 +21,34 @@ export default {
         instagram_url: this.formData.instagram_url,
         linkedin_url: this.formData.linkedin_url,
         twitter_url: this.formData.twitter_url
-      }
+      };
       this.$store.dispatch('clientInfo/infoPatch', formData).then(() => {
         setTimeout(() => {
-          this.$emit('collapseParent', 'third')
-        }, 500)
-      })
+          this.$emit('collapseParent', 'third');
+        }, 500);
+      });
     },
     atCreatedLabels () {
       if (this.formData.benefits === undefined) {
         setTimeout(() => {
-          this.getMultiLabel('benefits')
-          this.getMultiLabel('company_values')
-        }, 500)
+          this.getMultiLabel('benefits');
+          this.getMultiLabel('company_values');
+        }, 500);
       } else {
-        this.getMultiLabel('benefits')
-        this.getMultiLabel('company_values')
+        this.getMultiLabel('benefits');
+        this.getMultiLabel('company_values');
       }
     }
   },
   created () {
-    this.atCreatedLabels()
+    this.atCreatedLabels();
   },
   components: {
     CircleProgress,
     compAccordion,
     Multiselect
   }
-}
+};
 </script>
 
 <template>
@@ -142,7 +142,7 @@ export default {
               <div class="toggle-input-column">
                 <label for="urlop_b2b">Urlop B2B</label>
                 <input
-                  v-model="formData.holidays"
+                  v-model.number="formData.holidays"
                   id="urlop_b2b"
                   type="number"
                   class="normal"
@@ -164,7 +164,7 @@ export default {
               <div class="toggle-input-column">
                 <label for="chrobowe_b2b">Chrobowe B2B</label>
                 <input
-                  v-model="formData.sick_leave"
+                  v-model.number="formData.sick_leave"
                   type="number"
                   id="chrobowe_b2b"
                   class="normal"

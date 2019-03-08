@@ -1,8 +1,8 @@
 <script>
-import { clientMixin } from './_mixin.js'
-import CircleProgress from '@/components/UI/circleprogress.vue'
-import compAccordion from '@/components/UI/accordion.vue'
-import Multiselect from 'vue-multiselect'
+import { clientMixin } from './_mixin.js';
+import CircleProgress from '@/components/UI/circleprogress.vue';
+import compAccordion from '@/components/UI/accordion.vue';
+import Multiselect from 'vue-multiselect';
 export default {
   mixins: [clientMixin],
   methods: {
@@ -29,60 +29,65 @@ export default {
         contact_preference: this.formData.contact_preference,
         hr_department: this.formData.hr_department,
         interest_in_products: this.formData.interest_in_products
-      }
-      this.$store.dispatch('clientInfo/infoPatch', formData).then(() => {
-        setTimeout(() => {
-          this.$emit('collapseParent', 'second')
-        }, 500)
-      })
+      };
+      this.$store
+        .dispatch('clientInfo/userPatch', formData)
+        .then(() => {
+          setTimeout(() => {
+            this.$emit('collapseParent', 'second');
+          }, 500);
+        })
+        .catch(err => {
+          console.log(err, 'hata');
+        });
     },
     atCreatedLabels () {
       if (this.formData.legal_form === undefined) {
         setTimeout(() => {
-          this.getSingleLabel('legal_form')
-          this.getSingleLabel('country')
-        }, 500)
+          this.getSingleLabel('legal_form');
+          this.getSingleLabel('country');
+        }, 500);
       } else {
-        this.getSingleLabel('legal_form')
-        this.getSingleLabel('country')
+        this.getSingleLabel('legal_form');
+        this.getSingleLabel('country');
       }
     }
   },
   computed: {
     errorCheck () {
       // eslint-disable-next-line no-useless-escape
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      let errors = 0
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      let errors = 0;
       if (!this.formData.legal_form || !this.formData.legal_form.value) {
-        ++errors
+        ++errors;
       }
       if (
         !this.formData.payment_contact_email ||
         !re.test(this.formData.payment_contact_email)
       ) {
-        ++errors
+        ++errors;
       }
       if (
         !this.formData.cooperation_contact_email ||
         !re.test(this.formData.cooperation_contact_email)
       ) {
-        ++errors
+        ++errors;
       }
       if (!this.formData.country || !this.formData.country.value) {
-        ++errors
+        ++errors;
       }
-      return errors > 0
+      return errors > 0;
     }
   },
   created () {
-    this.atCreatedLabels()
+    this.atCreatedLabels();
   },
   components: {
     CircleProgress,
     compAccordion,
     Multiselect
   }
-}
+};
 </script>
 
 <template>
@@ -166,7 +171,7 @@ export default {
                 type="number"
                 id="capital_group_name"
                 placeholder="RRRR"
-                v-model="formData.date_of_creation"
+                v-model.number="formData.date_of_creation"
                 style="width:12rem"
               >
             </div>
@@ -194,7 +199,7 @@ export default {
                 type="number"
                 id="postal_code"
                 placeholder="Wpisz"
-                v-model="formData.postal_code"
+                v-model.number="formData.postal_code"
               >
             </div>
           </div>

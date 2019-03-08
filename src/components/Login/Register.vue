@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import loadingSvg from '@/components/UI/form/loading.vue'
-import avatar from '@/components/UI/avatar.vue'
+import loadingSvg from '@/components/UI/form/loading.vue';
+import avatar from '@/components/UI/avatar.vue';
 export default {
   data () {
     return {
@@ -51,49 +51,49 @@ export default {
         password: ''
       },
       error: false
-    }
+    };
   },
   computed: {
     process () {
-      return this.$store.getters['userAuth/process']
+      return this.$store.getters['userAuth/process'];
     },
     avatarName () {
-      let avatar = this.formData.email
+      let avatar = this.formData.email;
       if (avatar.length <= 0) {
-        avatar = 'makemymind'
+        avatar = 'makemymind';
       }
-      return avatar
+      return avatar;
     }
   },
   methods: {
     validate () {
-      const errors = this.$store.getters['userAuth/errors']
+      const errors = this.$store.getters['userAuth/errors'];
       if (errors.email) {
-        this.error = true
-        return errors.email[0]
+        this.error = true;
+        return errors.email[0];
       } else if (errors.password) {
-        this.error = true
-        return errors.password[0]
+        this.error = true;
+        return errors.password[0];
       }
     },
     onSubmit () {
-      this.$store.dispatch('userAuth/signup', this.formData)
+      this.$store.dispatch('userAuth/signup', this.formData);
       setTimeout(() => {
-        this.formData.email = ''
-        this.formData.password = ''
-      }, 1500)
+        this.formData.email = '';
+        this.formData.password = '';
+      }, 1500);
       setTimeout(() => {
-        this.$store.dispatch('userAuth/cleanError')
-        this.error = false
-      }, 5000)
+        this.$store.dispatch('userAuth/cleanError');
+        this.error = false;
+      }, 5000);
     }
   },
   beforeDestroy () {
-    this.$store.dispatch('userAuth/cleanError')
+    this.$store.dispatch('userAuth/cleanError');
   },
   components: {
     loadingSvg,
     avatar
   }
-}
+};
 </script>

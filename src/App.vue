@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import compHeader from '@/components/UI/Header.vue'
-import compSidebar from '@/components/UI/Sidebar.vue'
+import compHeader from '@/components/UI/Header.vue';
+import compSidebar from '@/components/UI/Sidebar.vue';
 
 export default {
   components: {
@@ -18,10 +18,10 @@ export default {
   },
   computed: {
     isAuth () {
-      return this.$store.getters['userAuth/isAuth']
+      return this.$store.getters['userAuth/isAuth'];
     }
   }
-}
+};
 </script>
 
 <style lang="scss" src="@/assets/main.scss">

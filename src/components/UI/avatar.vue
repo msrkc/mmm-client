@@ -1,9 +1,13 @@
 <template>
-<svg :style='svgStyle'>
-  <text x='50%' y='50%' text-anchor='middle' dominant-baseline='central' :style='textStyle'>
-    {{ avatarLetter }}
-  </text>
-</svg>
+  <svg :style="svgStyle">
+    <text
+      x="50%"
+      y="50%"
+      text-anchor="middle"
+      dominant-baseline="central"
+      :style="textStyle"
+    >{{ avatarLetter }}</text>
+  </svg>
 </template>
 <script>
 export default {
@@ -26,28 +30,30 @@ export default {
 
   computed: {
     avatarLetter () {
-      return this.name[0].toUpperCase()
+      return this.name[0].toUpperCase();
     },
     svgStyle () {
       // use hsl to define the background color.
-      const letterIndex = this.avatarLetter.charCodeAt() - 64
+      const letterIndex = this.avatarLetter.charCodeAt() - 64;
 
-      const hue = (360 / 26) * letterIndex
-      const backgroundColor = `hsl(${hue}, 68%, 48%)`
+      const hue = (360 / 26) * letterIndex;
+      const backgroundColor = `hsl(${hue}, 68%, 48%)`;
       return {
         width: `${this.size}px`,
         height: `${this.size}px`,
         borderRadius: this.rounded ? '100%' : '0',
-        background: this.name.includes('makemymind') ? '#FFCB4A' : backgroundColor
-      }
+        background: this.name.includes('makemymind')
+          ? '#FFCB4A'
+          : backgroundColor
+      };
     },
     textStyle () {
       return {
         fill: 'rgba(255, 255, 255, .7)',
         fontFamily: "'Arial', monospace",
         fontSize: `${this.size * 0.65}px`
-      }
+      };
     }
   }
-}
+};
 </script>

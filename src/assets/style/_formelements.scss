@@ -21,31 +21,31 @@
       right: 0;
       bottom: 0;
       background-color: #ccc;
-      -webkit-transition: .4s;
-      transition: .4s;
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
     }
 
     .slider:before {
       position: absolute;
-      content: "";
+      content: '';
       height: 16px;
       width: 16px;
       left: 4px;
       bottom: 4px;
       background-color: white;
-      -webkit-transition: .4s;
-      transition: .4s;
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
     }
 
-    input:checked+.slider {
-      background-color: #FFCB4A;
+    input:checked + .slider {
+      background-color: #ffcb4a;
     }
 
-    input:focus+.slider {
-      box-shadow: 0 0 1px #FFCB4A;
+    input:focus + .slider {
+      box-shadow: 0 0 1px #ffcb4a;
     }
 
-    input:checked+.slider:before {
+    input:checked + .slider:before {
       transform: translateX(14px);
     }
 
@@ -65,8 +65,8 @@
     flex-flow: row;
     align-items: center;
 
-    input[type=checkbox],
-    input[type=radio] {
+    input[type='checkbox'],
+    input[type='radio'] {
       position: relative;
       width: 18px;
       height: 18px;
@@ -76,8 +76,8 @@
       appearance: none;
     }
 
-    input[type=checkbox]:before,
-    input[type=radio]:before {
+    input[type='checkbox']:before,
+    input[type='radio']:before {
       content: '';
       width: 16px;
       height: 16px;
@@ -87,21 +87,21 @@
       background: #fff;
     }
 
-    input[type=checkbox]:after,
-    input[type=radio]:after {
+    input[type='checkbox']:after,
+    input[type='radio']:after {
       content: '';
       width: 12px;
       height: 12px;
       position: absolute;
-      background: #E6E6E6;
+      background: #e6e6e6;
       border-radius: 50px;
       left: 2px;
       top: 2px;
     }
 
-    input[type=checkbox]:checked:after,
-    input[type=radio]:checked:after {
-      background: #FFCB4A;
+    input[type='checkbox']:checked:after,
+    input[type='radio']:checked:after {
+      background: #ffcb4a;
     }
 
     label {
@@ -121,7 +121,10 @@
     height: 10rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
+    font-family: inherit;
+    font-size: 1.3rem;
     outline: none;
+    resize: vertical;
   }
 
   input.normal {
@@ -185,7 +188,6 @@
     margin-left: 1.4rem;
   }
 
-
   label {
     font-size: 1.3rem;
     color: $lightgrey-text;
@@ -201,5 +203,4 @@
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
-
 }

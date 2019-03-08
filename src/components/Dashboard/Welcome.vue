@@ -187,40 +187,40 @@ export default {
         company_size: '10-49',
         language: 'pl'
       }
-    }
+    };
   },
   computed: {
     client () {
-      return this.$store.getters['clientInfo/client']
+      return this.$store.getters['clientInfo/client'];
     }
   },
   methods: {
     formHandler () {
-      this.$store.dispatch('clientInfo/welcomePatch', this.formData)
+      this.$store.dispatch('clientInfo/welcomePatch', this.formData);
     },
     falseLoading () {
       setTimeout(() => {
-        this.isLoading = false
-      }, 300)
+        this.isLoading = false;
+      }, 300);
     }
   },
   watch: {
     client (newCount, oldCount) {
       if (newCount.identifier) {
-        this.$router.push({ name: 'DashboardHome' })
+        this.$router.push({ name: 'DashboardHome' });
       }
     }
   },
   mounted () {
-    this.falseLoading()
+    this.falseLoading();
     if (
       Object.entries(this.client).length === 0 &&
       this.client.constructor === Object
     ) {
-      this.$store.dispatch('clientInfo/getClient')
+      this.$store.dispatch('clientInfo/getClient');
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

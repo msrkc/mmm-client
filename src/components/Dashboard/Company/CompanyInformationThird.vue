@@ -1,36 +1,36 @@
 <script>
-import { clientMixin } from './_mixin.js'
-import CircleProgress from '@/components/UI/circleprogress.vue'
-import compAccordion from '@/components/UI/accordion.vue'
-import Multiselect from 'vue-multiselect'
+import { clientMixin } from './_mixin.js';
+import CircleProgress from '@/components/UI/circleprogress.vue';
+import compAccordion from '@/components/UI/accordion.vue';
+import Multiselect from 'vue-multiselect';
 export default {
   mixins: [clientMixin],
   methods: {
     atCreatedLabels () {
       if (this.formData.benefits === undefined) {
         setTimeout(() => {
-          this.getMultiLabel('technology_stack')
-          this.getMultiLabel('methodologies')
-          this.getMultiLabel('version_control_systems')
-          this.getMultiLabel('specialization')
-        }, 500)
+          this.getMultiLabel('technology_stack');
+          this.getMultiLabel('methodologies');
+          this.getMultiLabel('version_control_systems');
+          this.getMultiLabel('specialization');
+        }, 500);
       } else {
-        this.getMultiLabel('technology_stack')
-        this.getMultiLabel('methodologies')
-        this.getMultiLabel('version_control_systems')
-        this.getMultiLabel('specialization')
+        this.getMultiLabel('technology_stack');
+        this.getMultiLabel('methodologies');
+        this.getMultiLabel('version_control_systems');
+        this.getMultiLabel('specialization');
       }
     }
   },
   created () {
-    this.atCreatedLabels()
+    this.atCreatedLabels();
   },
   components: {
     CircleProgress,
     compAccordion,
     Multiselect
   }
-}
+};
 </script>
 
 <template>
