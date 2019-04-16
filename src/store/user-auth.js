@@ -23,7 +23,6 @@ const mutations = {
   },
   clearAuthData (state) {
     state.token = null;
-    state.email = null;
   },
   showError (state, error) {
     state.errors = error;
