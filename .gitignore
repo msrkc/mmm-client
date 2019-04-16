@@ -2,8 +2,7 @@
 node_modules
 /dist
 /design
-.env.development
-.env.production
+*.env
 
 # local env files
 .env.local

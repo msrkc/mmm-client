@@ -5,4 +5,4 @@
 
 
 
-![mmm](C:\Users\murat\Desktop\mmm-client\mmm.png)
+![mmm](mmm.png)
